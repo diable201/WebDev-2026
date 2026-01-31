@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- IMPORTANT: makes the page readable on mobile (no "zoomed out" layout) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Mini Profile • Lecture 2</title>
+
+  <!-- CSS: external stylesheet is the recommended way (scalable + DRY) -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- SEMANTIC STRUCTURE:
+       header  -> top part (title, navigation)
+       main    -> unique page content (only one <main>)
+       footer  -> bottom meta info
+  -->
+
+  <header class="topbar">
+    <div class="brand">
+      <!-- purely decorative element, hidden from screen readers -->
+      <div class="logo" aria-hidden="true"></div>
+      <h1>Mini Profile</h1>
+    </div>
+
+    <!-- nav is for major navigation links -->
+    <nav class="navlinks" aria-label="Primary navigation">
+      <!-- href="#id" jumps to the element with this id -->
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <!-- SECTION: ABOUT -->
+    <section id="about" class="card">
+      <div class="profileRow">
+        <div class="avatar">
+          <div>DEV</div>
+        </div>
+
+        <div>
+          <h2 style="margin:0;">Your Name</h2>
+          <p class="muted" style="margin:4px 0 0;">
+            Frontend apprentice • KBTU
+          </p>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:12px;">
+        HTML gives structure (meaning), CSS gives style (appearance). We build a semantic page
+        and then make layout with Flexbox/Grid.
+      </p>
+
+      <p>
+        My GitHub:
+        <!-- target=_blank opens new tab; rel prevents some security issues -->
+        <a href="https://github.com/" target="_blank" rel="noreferrer">github.com</a>
+      </p>
+
+      <!-- Images should have alt text for accessibility -->
+      <figure>
+        <img
+          src="https://picsum.photos/seed/profile/800/300"
+          width="800"
+          height="300"
+          alt="A placeholder banner image"
+          style="max-width:100%; height:auto; border-radius: 14px;"
+        />
+        <figcaption class="muted">Placeholder image (replace with your own).</figcaption>
+      </figure>
+    </section>
+
+    <!-- SECTION: SKILLS -->
+    <section id="skills" class="card">
+      <h2 style="margin-top:0;">Skills</h2>
+
+      <!-- ul = unordered list -->
+      <h3>What I’m learning now</h3>
+      <ul>
+        <li>HTML semantics</li>
+        <li>Forms + validation</li>
+        <li>CSS selectors</li>
+        <li>Box model</li>
+        <li>Flexbox + Grid</li>
+      </ul>
+
+      <!-- ol = ordered list -->
+      <h3>My plan</h3>
+      <ol>
+        <li>Practice HTML structure</li>
+        <li>Style with CSS</li>
+        <li>Make responsive layout</li>
+      </ol>
+
+      <!-- Tables are for data, NOT for layout -->
+      <h3>Weekly schedule (table)</h3>
+      <table class="table">
+        <tr>
+          <th>Day</th>
+          <th>Task</th>
+        </tr>
+        <tr>
+          <td>Mon</td>
+          <td>HTML practice</td>
+        </tr>
+        <tr>
+          <td>Wed</td>
+          <td>CSS practice</td>
+        </tr>
+        <tr>
+          <td>Fri</td>
+          <td>Mini project</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SECTION: CONTACT / FORM -->
+    <section id="contact" class="card">
+      <h2 style="margin-top:0;">Send a message</h2>
+
+      <!-- FORMS:
+           - label+for + input+id is crucial for accessibility
+           - required/type=email give native browser validation
+           - backend MUST validate again later (we'll do that in Django part)
+      -->
+      <form action="#" method="post">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" minlength="2" required />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@kbtu.kz" required autocomplete="email" />
+
+        <label for="topic">Topic</label>
+        <select id="topic" name="topic" required>
+          <option value="" selected disabled>Choose one...</option>
+          <option value="question">Question</option>
+          <option value="feedback">Feedback</option>
+          <option value="project">Project idea</option>
+        </select>
+
+        <label for="msg">Message</label>
+        <textarea id="msg" name="message" rows="4" required></textarea>
+
+        <fieldset class="fieldset">
+          <legend>Preferred contact method</legend>
+
+          <!-- radio buttons: same name => only one can be selected -->
+          <label class="inline">
+            <input type="radio" name="contact_method" value="email" checked />
+            Email
+          </label>
+
+          <label class="inline">
+            <input type="radio" name="contact_method" value="telegram" />
+            Telegram
+          </label>
+        </fieldset>
+
+        <label class="inline">
+          <input type="checkbox" name="agree" required />
+          I agree to be contacted
+        </label>
+
+        <button class="btn" type="submit">Send</button>
+
+        <!-- Teaching demo:
+             1) Submit empty => see native validation
+             2) Wrong email => browser warns
+             3) Required checkbox => must agree
+        -->
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small class="muted">© 2026 • Built in Lecture 2</small>
+  </footer>
+</body>
+</html>
