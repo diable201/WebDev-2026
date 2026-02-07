@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <style>
+        .hidden { display: none; }
+        .highlight { background: yellow; padding: 4px; }
+        .big { font-size: 2rem; }
+    </style>
+    <div id="app">
+        <h1 class="title">Hello</h1>
+        <ul>
+            <li class="item">First</li>
+            <li class="item active">Second</li>
+            <li class="item">Third</li>
+        </ul>
+    </div>
+    <script>
+        // By ID
+        const app = document.querySelector("#app");
+        console.log(app);
+
+        // By class
+        const title = document.querySelector(".title");
+        console.log(title.textContent); // "Hello"
+
+        // Complex CSS selector
+        const active = document.querySelector(".item.active");
+        console.log(active.textContent); // "Second"
+
+        // All items
+        const items = document.querySelectorAll(".item");
+        console.log(items.length); // 3
+        items.forEach(el => console.log(el.textContent));
+
+
+        title.textContent = "Hello, World!";
+
+        title.classList.add("highlight");
+        // title.classList.remove("title");
+        console.log(title.classList.contains("highlight")); // true
+        // title.classList.toggle("highlight"); // Removes "highlight"
+        // console.log(title.classList.contains("highlight")); // false
+
+        title.style.color = "red";
+        title.style.fontSize = "100px";
+
+        // title.classList.toggle("hidden");
+
+        const newItem = document.createElement("li");
+        newItem.textContent = "Fourth - Created with JavaScript";
+
+        newItem.classList.add("item");
+
+        // add to the list 
+        const list = document.querySelector("ul");
+        list.appendChild(newItem);
+
+
+        // create 5 elements in a loop
+        for (let i = 1; i <= 5; i++) {
+            const item = document.createElement("li");
+            item.textContent = `Item ${i}`;
+            item.classList.add("item");
+            list.appendChild(item);
+        }
+
+        // remove an element
+        const firstItem = document.querySelector(".item");
+        firstItem.remove();
+
+    </script>
+</body>
+</html>

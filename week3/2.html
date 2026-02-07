@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <button id="btn">Click me</button>
+    <input id="input" placeholder="Input here...">
+    <p id="output"></p>
+    <h1>Event Handling and Element Position</h1>
+    <script>
+        const btn = document.querySelector("#btn");
+        const input = document.querySelector("#input");
+        const output = document.querySelector("#output");
+
+        // Click event
+        btn.addEventListener("click", (e) => {
+            console.log("Button clicked!");
+            console.log("Target: ", e.target);
+            output.textContent = "Button was clicked!";
+        });
+
+        // Input event
+        input.addEventListener("input", (e) => {
+            output.textContent = `You typed: ${e.target.value}`;
+        });
+
+        // Keydown event on whole document
+        document.addEventListener("keydown", (e) => {
+            console.log(`Key pressed: ${e.key}`);
+            if (e.key === "Enter") {
+                output.textContent = "You pressed Enter!";
+                input.value = ""; // Clear input
+            }
+        });
+
+        // Set Timeout example
+        setTimeout(() => {
+            console.log("This message appears after 3 seconds");
+        }, 3000)
+
+        // Set Interval example
+        let count = 0;
+        const timer = setInterval(() => {
+            count++;
+            console.log(`Interval count #${count}`);
+            if (count >= 5) {
+                clearInterval(timer);
+                console.log("Interval stopped");
+            }
+        }, 1000);
+
+        const heading = document.querySelector("h1");
+        const rect = heading.getBoundingClientRect();
+
+        console.log("Heading position and size: ", rect);
+        console.log("Top: ", rect.top);
+        console.log("Left: ", rect.left);
+        console.log("Width: ", rect.width);
+        console.log("Height: ", rect.height);
+    </script>
+</body>
+</html>
