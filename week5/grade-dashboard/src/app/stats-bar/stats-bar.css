@@ -1,0 +1,53 @@
+:host {
+  display: block;
+}
+
+.stats {
+  display: flex;
+  background: #1a1a2e;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat__value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+}
+
+.stat__label {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.stat--green .stat__value {
+  color: #55efc4;
+}
+
+.stat--red .stat__value {
+  color: #ff7675;
+}
+
+.stat--purple .stat__value {
+  color: #a29bfe;
+}

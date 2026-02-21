@@ -1,0 +1,63 @@
+<div class="dashboard">
+
+  <!-- ── Header ───────────────────────────────────────────── -->
+  <header class="header">
+    <div>
+      <h1 class="header__title">Grade Dashboard</h1>
+      <p class="header__sub">Web Development</p>
+    </div>
+    <button class="btn-add" (click)="addStudent()">
+      + Add Student
+    </button>
+  </header>
+
+  <!-- ── Stats bar ─────────────────────────────────────────── -->
+  <!-- We pass the full students array DOWN to the child component -->
+  <app-stats-bar [students]="students"/>
+
+  <!-- ── Search ────────────────────────────────────────────── -->
+  <div class="search-row">
+    <input
+      [(ngModel)]="searchTerm"
+      placeholder="Search by name..."
+      class="search-input"
+    />
+    @if (searchTerm) {
+      <button class="btn-clear" (click)="searchTerm = ''">✕ Clear</button>
+    }
+    <span class="count-label">
+      Showing {{ filteredStudents.length }} of {{ students.length }}
+    </span>
+  </div>
+
+  <!-- ── Student grid ───────────────────────────────────────── -->
+  <div class="grid">
+
+    @for (student of filteredStudents; track student.id) {
+
+      <!-- For each student we render a StudentCardComponent   -->
+        <!-- We pass data DOWN with [student]                    -->
+        <!-- We listen for events UP with (remove) and (gradeUp)-->
+      <app-student-card
+        [student]="student"
+        (remove)="removeStudent($event)"
+        (gradeUp)="bumpGrade($event)"
+      />
+
+    } @empty {
+
+      <div class="empty-state">
+        @if (searchTerm) {
+          <p>No students match "{{ searchTerm }}"</p>
+          <p class="empty-hint">Try a different name or clear the search.</p>
+        } @else {
+          <p>No students yet.</p>
+          <p class="empty-hint">Click "+ Add Student" to get started.</p>
+        }
+      </div>
+
+    }
+
+  </div>
+
+</div>

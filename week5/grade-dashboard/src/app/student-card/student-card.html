@@ -1,0 +1,56 @@
+<div class="card"
+     [class.card--new]="isNew"
+     [class.card--failing]="statusColor === 'red'">
+
+  <!-- Top section: avatar, name, and status badge -->
+  <div class="card__header">
+
+    <div class="card__avatar">
+      {{ student().name.charAt(0) }}
+    </div>
+
+    <div class="card__info">
+      <h3 class="card__name">{{ student().name }}</h3>
+      <span class="card__subject">{{ student().subject }}</span>
+    </div>
+
+    <span class="badge" [class]="'badge--' + statusColor">
+      {{ statusLabel }}
+    </span>
+
+  </div>
+
+  <!-- Grade number and progress bar -->
+  <div class="card__grade">
+    <span class="grade__number">{{ student().grade }}</span>
+    <span class="grade__max">/ 100</span>
+  </div>
+
+  <div class="grade-bar">
+    <div class="grade-bar__fill"
+         [style.width.%]="student().grade"
+         [style.background-color]="
+           statusColor === 'green'  ? '#00b894' :
+           statusColor === 'blue'   ? '#0984e3' :
+           statusColor === 'orange' ? '#e17055' :
+                                      '#d63031'">
+    </div>
+  </div>
+
+  <!-- Footer: timer and action buttons -->
+  <div class="card__footer">
+
+    <span class="card__timer">⏱ {{ secondsOnScreen }}s on screen</span>
+
+    <div class="card__actions">
+      <button class="btn btn--up" (click)="onGradeUp()">
+        ▲ +5
+      </button>
+      <button class="btn btn--remove" (click)="onRemove()">
+        Remove
+      </button>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f0f2f8;
+  min-height: 100vh;
+}
+
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.header__title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.02em;
+}
+
+.header__sub {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.btn-add {
+  padding: 10px 22px;
+  background: #6c5ce7;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-add:hover {
+  background: #5a4bd4;
+}
+
+/* ── Search row ───────────────────────────────────────────── */
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.search-input {
+  width: 320px;
+  padding: 10px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background: #ffffff;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #6c5ce7;
+}
+
+.btn-clear {
+  padding: 8px 14px;
+  background: #eeeeee;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #555;
+  transition: background 0.15s;
+}
+
+.btn-clear:hover {
+  background: #ddd;
+}
+
+.count-label {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-left: auto;
+}
+
+/* ── Grid ─────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #bbb;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.empty-hint {
+  font-size: 0.85rem;
+  color: #ccc;
+}
