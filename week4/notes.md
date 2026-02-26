@@ -1,52 +1,52 @@
-# Конспект — Неделя 4: Введение в Angular
+# Notes — Week 4: Introduction to Angular
 
-## 1. Что такое Angular?
+## 1. What is Angular?
 
-**Angular** — это полноценный фронтенд-фреймворк от Google (написан на TypeScript) для создания одностраничных приложений (SPA).
+**Angular** is a full-featured frontend framework from Google (written in TypeScript) for building single-page applications (SPAs).
 
-### Почему Angular — «полноценный» фреймворк?
+### Why Angular is a "complete" Framework
 
-| Возможность | Angular | React | Vue |
-|-------------|:-------:|:-----:|:---:|
-| Роутинг | ✅ встроен | ⚙️ react-router | ⚙️ vue-router |
-| Управление формами | ✅ встроен | ⚙️ сторонние | ⚙️ сторонние |
-| HTTP-клиент | ✅ встроен | ⚙️ axios/fetch | ⚙️ axios/fetch |
-| Внедрение зависимостей (DI) | ✅ встроен | ❌ | ❌ |
-| Типизация | ✅ TypeScript | 🔶 опционально | 🔶 опционально |
+| Feature | Angular | React | Vue |
+|---------|:-------:|:-----:|:---:|
+| Routing | ✅ built-in | ⚙️ react-router | ⚙️ vue-router |
+| Forms management | ✅ built-in | ⚙️ third-party | ⚙️ third-party |
+| HTTP client | ✅ built-in | ⚙️ axios/fetch | ⚙️ axios/fetch |
+| Dependency Injection (DI) | ✅ built-in | ❌ | ❌ |
+| Type safety | ✅ TypeScript | 🔶 optional | 🔶 optional |
 | CLI | ✅ Angular CLI | ✅ CRA/Vite | ✅ Vue CLI |
 
-### История версий
+### Version History
 
-| Версия | Год | Ключевые изменения |
-|--------|-----|--------------------|
-| AngularJS (1.x) | 2010 | Первый Angular; двустороннее связывание через `$scope` |
-| Angular 2+ | 2016 | Полная переработка; TypeScript, компоненты, DI |
-| Angular 17 | 2023 | Новый синтаксис шаблонов (`@if`, `@for`), standalone API |
-| Angular 19–21 | 2024–2025 | Сигналы (`signal`, `input()`, `output()`), стабильная SSR |
+| Version | Year | Key Changes |
+|---------|------|-------------|
+| AngularJS (1.x) | 2010 | First Angular; two-way binding via `$scope` |
+| Angular 2+ | 2016 | Complete rewrite; TypeScript, components, DI |
+| Angular 17 | 2023 | New template syntax (`@if`, `@for`), standalone API |
+| Angular 19–21 | 2024–2025 | Signals (`signal`, `input()`, `output()`), stable SSR |
 
 ---
 
-## 2. Цели и архитектура Angular
+## 2. Goals and Architecture of Angular
 
-### Основные строительные блоки
+### Core Building Blocks
 
 ```
-Приложение Angular
-├── AppComponent (корневой компонент)
+Angular Application
+├── AppComponent (root component)
 │   ├── HeaderComponent
 │   ├── MainComponent
 │   │   ├── ProductListComponent
 │   │   └── ProductCardComponent
 │   └── FooterComponent
 │
-├── Services (бизнес-логика, HTTP)
-├── Router (навигация между страницами)
+├── Services (business logic, HTTP)
+├── Router (navigation between pages)
 └── Modules / Standalone API
 ```
 
-### Компонент
+### Component
 
-Основная единица UI. Состоит из трёх частей:
+The fundamental UI building block. Consists of three parts:
 
 ```
 Component = Template (HTML) + Class (TypeScript) + Styles (CSS)
@@ -54,8 +54,8 @@ Component = Template (HTML) + Class (TypeScript) + Styles (CSS)
 
 ```typescript
 @Component({
-  selector: 'app-hello',        // HTML-тег для использования
-  template: `<h1>Привет, {{ name }}!</h1>`,
+  selector: 'app-hello',        // HTML tag used to place this component
+  template: `<h1>Hello, {{ name }}!</h1>`,
   styles: [`h1 { color: navy; }`],
 })
 export class HelloComponent {
@@ -63,12 +63,12 @@ export class HelloComponent {
 }
 ```
 
-### Сервис и внедрение зависимостей (DI)
+### Service and Dependency Injection (DI)
 
-**Сервис** — класс для бизнес-логики (работа с API, хранение состояния), не привязанный к UI.
+A **service** is a class for business logic (API calls, state management) that is not tied to any specific UI component.
 
 ```typescript
-@Injectable({ providedIn: 'root' })   // доступен везде
+@Injectable({ providedIn: 'root' })   // available app-wide
 export class UserService {
   getUsers() {
     return this.http.get<User[]>('/api/users');
@@ -76,7 +76,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 }
 
-// Использование в компоненте
+// Using the service in a component
 @Component({ ... })
 export class UserListComponent {
   users: User[] = [];
@@ -87,22 +87,22 @@ export class UserListComponent {
 }
 ```
 
-### Декораторы
+### Decorators
 
-Декораторы — функции TypeScript, добавляющие метаданные к классам и их членам.
+Decorators are TypeScript functions that add metadata to classes and their members.
 
-| Декоратор | Назначение |
-|-----------|-----------|
-| `@Component` | Объявить класс как Angular-компонент |
-| `@Injectable` | Объявить класс как сервис (провайдер DI) |
-| `@Directive` | Объявить директиву |
-| `@Pipe` | Объявить пайп (преобразователь данных в шаблоне) |
-| `@NgModule` | Объявить модуль (устаревший, но ещё используется) |
+| Decorator | Purpose |
+|-----------|---------|
+| `@Component` | Declare a class as an Angular component |
+| `@Injectable` | Declare a class as a service (DI provider) |
+| `@Directive` | Declare a directive |
+| `@Pipe` | Declare a pipe (template data transformer) |
+| `@NgModule` | Declare a module (legacy, but still used) |
 
-### Standalone-компоненты (Angular 17+)
+### Standalone Components (Angular 17+)
 
 ```typescript
-// Без модуля — компонент объявляет собственные зависимости
+// No module needed — the component declares its own dependencies
 @Component({
   standalone: true,
   selector: 'app-root',
@@ -116,57 +116,57 @@ export class AppComponent { }
 
 ## 3. Angular CLI
 
-**Angular CLI (Command Line Interface)** — инструмент командной строки для создания и управления Angular-проектами.
+**Angular CLI (Command Line Interface)** — a command-line tool for creating and managing Angular projects.
 
-### Установка
+### Installation
 
 ```bash
 npm install -g @angular/cli
-ng version   # проверить установку
+ng version   # verify installation
 ```
 
-### Основные команды
+### Key Commands
 
 ```bash
-# Создать новый проект
+# Create a new project
 ng new my-app
-# Опции: --standalone (современный API), --routing (включить роутер), --style=css|scss
+# Options: --standalone (modern API), --routing (enable router), --style=css|scss
 
-# Запустить dev-сервер
+# Start the dev server
 ng serve
-ng serve --open   # автоматически открыть браузер (http://localhost:4200)
+ng serve --open   # automatically open the browser (http://localhost:4200)
 
-# Сборка для продакшена
+# Production build
 ng build
 ng build --configuration production
 
-# Запустить тесты
-ng test           # unit-тесты (Karma + Jasmine)
-ng e2e            # end-to-end тесты
+# Run tests
+ng test           # unit tests (Karma + Jasmine)
+ng e2e            # end-to-end tests
 
-# Генерация кода (scaffolding)
-ng generate component components/header    # компонент
-ng generate service  services/user         # сервис
-ng generate pipe     pipes/date-format     # пайп
+# Code generation (scaffolding)
+ng generate component components/header    # component
+ng generate service  services/user         # service
+ng generate pipe     pipes/date-format     # pipe
 ng generate guard    guards/auth           # guard
-ng generate interface models/user          # интерфейс
+ng generate interface models/user          # interface
 ```
 
-### Структура сгенерированного проекта
+### Generated Project Structure
 
 ```
 my-app/
 ├── src/
 │   ├── app/
-│   │   ├── app.component.ts      ← корневой компонент
+│   │   ├── app.component.ts      ← root component
 │   │   ├── app.component.html
 │   │   ├── app.component.css
-│   │   ├── app.component.spec.ts ← unit-тест
-│   │   └── app.routes.ts         ← маршруты
-│   ├── index.html                ← точка входа HTML
-│   └── main.ts                   ← точка входа TS
-├── angular.json                  ← конфигурация CLI
-├── tsconfig.json                 ← конфигурация TypeScript
+│   │   ├── app.component.spec.ts ← unit test
+│   │   └── app.routes.ts         ← routes
+│   ├── index.html                ← HTML entry point
+│   └── main.ts                   ← TypeScript entry point
+├── angular.json                  ← CLI configuration
+├── tsconfig.json                 ← TypeScript configuration
 └── package.json
 ```
 
@@ -174,71 +174,71 @@ my-app/
 
 ## 4. JavaScript vs. TypeScript
 
-### Что такое TypeScript?
+### What is TypeScript?
 
-**TypeScript** — это надмножество JavaScript, добавляющее статическую типизацию. TypeScript-код компилируется в обычный JavaScript.
+**TypeScript** is a superset of JavaScript that adds static typing. TypeScript code compiles to plain JavaScript.
 
 ```
-TypeScript (.ts)  →  tsc (компилятор)  →  JavaScript (.js)
+TypeScript (.ts)  →  tsc (compiler)  →  JavaScript (.js)
 ```
 
-### Статическая типизация
+### Static Typing
 
 ```typescript
-// JavaScript — ошибки видны только в рантайме
+// JavaScript — errors are visible only at runtime
 function greet(name) {
   return 'Hello, ' + name.toUpperCase();
 }
-greet(42);   // Ошибка только при выполнении
+greet(42);   // Error only at runtime
 
-// TypeScript — ошибка на этапе компиляции
+// TypeScript — error caught at compile time
 function greet(name: string): string {
   return 'Hello, ' + name.toUpperCase();
 }
-greet(42);   // Ошибка: Argument of type 'number' is not assignable to parameter of type 'string'
+greet(42);   // Error: Argument of type 'number' is not assignable to parameter of type 'string'
 ```
 
-### Основные типы TypeScript
+### Core TypeScript Types
 
 ```typescript
-// Примитивы
+// Primitives
 let age: number = 25;
 let name: string = 'Alice';
 let active: boolean = true;
 let data: null = null;
 let id: undefined = undefined;
 
-// Массивы
+// Arrays
 let nums: number[] = [1, 2, 3];
 let tags: Array<string> = ['js', 'ts'];
 
-// Объект с типом
+// Typed object
 let user: { name: string; age: number } = { name: 'Alice', age: 25 };
 
-// Объединение типов (Union)
+// Union type
 let id: number | string = 42;
-id = 'abc-123';   // тоже OK
+id = 'abc-123';   // also OK
 
-// any — отключает проверку (избегайте!)
+// any — disables type checking (avoid!)
 let anything: any = 42;
-anything = 'string'; // OK, но теряем преимущества TS
+anything = 'string'; // OK, but loses TS benefits
 
-// unknown — безопаснее any
+// unknown — safer than any
 let value: unknown = getData();
 if (typeof value === 'string') {
-  console.log(value.toUpperCase());   // OK, тип сужен
+  console.log(value.toUpperCase());   // OK, type narrowed
 }
 ```
 
-### Интерфейсы
+### Interfaces
 
 ```typescript
 interface User {
   id: number;
   name: string;
   email: string;
-  role?: 'admin' | 'user';   // ? — необязательное поле
-  readonly createdAt: Date;  // readonly — нельзя изменить после создания
+  role?: 'admin' | 'user';   // ? — optional field
+  readonly createdAt: Date;  // readonly — cannot change after creation
 }
 
 const alice: User = {
@@ -249,24 +249,24 @@ const alice: User = {
 };
 ```
 
-### Type Alias
+### Type Aliases
 
 ```typescript
-type Status = 'pending' | 'active' | 'banned';   // строковый литеральный тип
+type Status = 'pending' | 'active' | 'banned';   // string literal type
 type ID = number | string;
 
 type Point = { x: number; y: number };
-type Point3D = Point & { z: number };             // пересечение типов
+type Point3D = Point & { z: number };             // intersection type
 ```
 
-### Классы и модификаторы доступа
+### Classes and Access Modifiers
 
 ```typescript
 class Student {
-  public  name: string;     // доступен везде (по умолчанию)
-  private grade: number;    // доступен только внутри класса
-  protected id: number;     // доступен в классе и наследниках
-  readonly school: string;  // только для чтения
+  public  name: string;     // accessible everywhere (default)
+  private grade: number;    // accessible only inside the class
+  protected id: number;     // accessible in the class and subclasses
+  readonly school: string;  // read-only
 
   constructor(name: string, grade: number) {
     this.name  = name;
@@ -279,7 +279,7 @@ class Student {
   }
 }
 
-// Краткая запись через параметры конструктора
+// Shorthand via constructor parameters
 class Student {
   constructor(
     public  name: string,
@@ -289,17 +289,17 @@ class Student {
 }
 ```
 
-### Дженерики (Generics)
+### Generics
 
 ```typescript
-// Функция работает с любым типом, сохраняя его
+// Function works with any type while preserving it
 function identity<T>(value: T): T {
   return value;
 }
-identity<number>(42);      // возвращает number
-identity<string>('hello'); // возвращает string
+identity<number>(42);      // returns number
+identity<string>('hello'); // returns string
 
-// Дженерик-интерфейс для API-ответа
+// Generic interface for an API response
 interface ApiResponse<T> {
   data: T;
   status: number;
@@ -309,10 +309,10 @@ interface ApiResponse<T> {
 const resp: ApiResponse<User[]> = await fetchUsers();
 ```
 
-### Декораторы TypeScript
+### TypeScript Decorators
 
 ```typescript
-// Декоратор класса (аналогично Angular @Component)
+// Class decorator (similar to Angular's @Component)
 function Sealed(constructor: Function) {
   Object.seal(constructor);
   Object.seal(constructor.prototype);
@@ -322,31 +322,31 @@ function Sealed(constructor: Function) {
 class BankAccount { }
 ```
 
-### Сравнение JS и TS
+### JS vs. TS Comparison
 
-| Аспект | JavaScript | TypeScript |
+| Aspect | JavaScript | TypeScript |
 |--------|-----------|-----------|
-| Типизация | Динамическая | Статическая (опциональная) |
-| Ошибки | Видны в рантайме | Видны при компиляции |
-| IDE-подсказки | Ограниченные | Полноценные (автодополнение, рефакторинг) |
-| Интерфейсы | Нет | Есть |
-| Декораторы | Экспериментально | Стабильно |
-| Компиляция | Не нужна | Нужна (`tsc`) |
-| Поддержка Angular | Можно | Рекомендуется |
+| Typing | Dynamic | Static (optional) |
+| Errors | Visible at runtime | Visible at compile time |
+| IDE support | Limited | Full (autocomplete, refactoring) |
+| Interfaces | No | Yes |
+| Decorators | Experimental | Stable |
+| Compilation | Not needed | Required (`tsc`) |
+| Angular support | Possible | Recommended |
 
 ---
 
-## Шпаргалка: Angular CLI
+## Cheat Sheet: Angular CLI
 
 ```bash
-ng new <name>                    # создать проект
-ng serve                         # запустить dev-сервер
-ng build                         # собрать проект
-ng test                          # запустить тесты
-ng generate component <path>     # создать компонент
-ng generate service  <path>      # создать сервис
-ng generate interface <path>     # создать интерфейс
-ng generate pipe     <path>      # создать пайп
-ng add @angular/material         # добавить библиотеку
-ng update                        # обновить зависимости
+ng new <name>                    # create a project
+ng serve                         # start the dev server
+ng build                         # build the project
+ng test                          # run tests
+ng generate component <path>     # generate a component
+ng generate service  <path>      # generate a service
+ng generate interface <path>     # generate an interface
+ng generate pipe     <path>      # generate a pipe
+ng add @angular/material         # add a library
+ng update                        # update dependencies
 ```

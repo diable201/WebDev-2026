@@ -1,47 +1,47 @@
-# Конспект — Неделя 3: JavaScript
+# Notes — Week 3: JavaScript
 
-## 1. Основы JavaScript
+## 1. JavaScript Basics
 
-### Подключение скрипта
+### Adding a Script
 
 ```html
-<!-- В конце <body> или с атрибутом defer -->
+<!-- At the end of <body> or with the defer attribute -->
 <script src="app.js" defer></script>
 
-<!-- Встроенный скрипт (для небольших фрагментов) -->
+<!-- Inline script (for small snippets) -->
 <script>
   console.log('Hello, World!');
 </script>
 ```
 
-### Переменные
+### Variables
 
 ```js
-var  legacy = 'устарело';   // function-scope, hoisting, избегайте
-let  count  = 0;            // block-scope, можно переприсвоить
-const PI    = 3.14159;      // block-scope, нельзя переприсвоить
+var  legacy = 'outdated';   // function-scope, hoisting, avoid using
+let  count  = 0;            // block-scope, can be reassigned
+const PI    = 3.14159;      // block-scope, cannot be reassigned
 ```
 
-### Операторы
+### Operators
 
 ```js
-// Арифметические
+// Arithmetic
 1 + 2   // 3
-10 % 3  // 1 (остаток)
-2 ** 8  // 256 (возведение в степень)
+10 % 3  // 1 (remainder)
+2 ** 8  // 256 (exponentiation)
 
-// Сравнение (всегда используйте ===)
-5 === '5'  // false — строгое равенство (тип + значение)
-5 ==  '5'  // true  — нестрогое (с приведением типа, избегайте)
+// Comparison (always prefer ===)
+5 === '5'  // false — strict equality (type + value)
+5 ==  '5'  // true  — loose equality (type coercion, avoid)
 5 !== 3    // true
 
-// Логические
+// Logical
 true && false  // false
 true || false  // true
 !true          // false
 ```
 
-### Управляющие конструкции
+### Control Flow
 
 ```js
 // if / else if / else
@@ -53,17 +53,17 @@ if (score >= 90) {
   grade = 'C';
 }
 
-// Тернарный оператор
-const label = score >= 60 ? 'Зачёт' : 'Незачёт';
+// Ternary operator
+const label = score >= 60 ? 'Pass' : 'Fail';
 
 // switch
 switch (day) {
-  case 0: console.log('Воскресенье'); break;
-  case 6: console.log('Суббота'); break;
-  default: console.log('Будний день');
+  case 0: console.log('Sunday'); break;
+  case 6: console.log('Saturday'); break;
+  default: console.log('Weekday');
 }
 
-// Циклы
+// Loops
 for (let i = 0; i < 5; i++) { /* ... */ }
 
 let n = 0;
@@ -76,40 +76,40 @@ for (const key in obj)   { console.log(key); }
 
 ---
 
-## 2. Стандарты JavaScript (ES6+)
+## 2. JavaScript Standards (ES6+)
 
-### `let` и `const`
+### `let` and `const`
 
 ```js
-// const с объектом: сам объект нельзя заменить, но свойства менять можно
+// const with an object: the binding cannot be reassigned, but properties can change
 const user = { name: 'Alice' };
 user.name = 'Bob';   // OK
 user = {};           // TypeError
 ```
 
-### Стрелочные функции
+### Arrow Functions
 
 ```js
-// Обычная функция
+// Regular function
 function add(a, b) { return a + b; }
 
-// Стрелочная — короче, не имеет собственного this
+// Arrow function — shorter syntax, no own `this`
 const add = (a, b) => a + b;
 
-// С телом функции
+// With a function body
 const greet = name => {
-  return `Привет, ${name}!`;
+  return `Hello, ${name}!`;
 };
 ```
 
-### Шаблонные строки (Template Literals)
+### Template Literals
 
 ```js
 const name = 'Alice';
 const age = 25;
 console.log(`${name} is ${age} years old.`);
 
-// Многострочные строки
+// Multi-line strings
 const html = `
   <div class="card">
     <h2>${name}</h2>
@@ -117,16 +117,16 @@ const html = `
 `;
 ```
 
-### Деструктуризация
+### Destructuring
 
 ```js
-// Массив
+// Array
 const [first, second, ...rest] = [1, 2, 3, 4, 5];
 
-// Объект
-const { name, age, city = 'Москва' } = user;  // city — значение по умолчанию
+// Object
+const { name, age, city = 'Almaty' } = user;  // city has a default value
 
-// В параметрах функции
+// In function parameters
 function display({ name, grade }) {
   console.log(`${name}: ${grade}`);
 }
@@ -135,20 +135,20 @@ function display({ name, grade }) {
 ### Spread / Rest
 
 ```js
-// Spread: разворачивает массив/объект
+// Spread: expands an array/object
 const nums = [1, 2, 3];
 const more = [...nums, 4, 5];       // [1, 2, 3, 4, 5]
 
 const base = { a: 1 };
 const extended = { ...base, b: 2 }; // { a: 1, b: 2 }
 
-// Rest: собирает оставшиеся аргументы
+// Rest: collects remaining arguments
 function sum(...numbers) {
   return numbers.reduce((acc, n) => acc + n, 0);
 }
 ```
 
-### Модули ES6
+### ES6 Modules
 
 ```js
 // math.js
@@ -163,21 +163,21 @@ import * as math from './math.js';
 
 ---
 
-## 3. Типы данных и область видимости переменных
+## 3. Data Types and Variable Scoping
 
-### Примитивные типы
+### Primitive Types
 
-| Тип | Пример | Описание |
-|-----|--------|----------|
-| `number` | `42`, `3.14`, `NaN`, `Infinity` | Числа (целые и дробные) |
-| `string` | `'hello'`, `"hi"`, `` `template` `` | Текст |
-| `boolean` | `true`, `false` | Логические значения |
-| `null` | `null` | Намеренное отсутствие значения |
-| `undefined` | `undefined` | Переменная объявлена, но не инициализирована |
-| `symbol` | `Symbol('id')` | Уникальный идентификатор |
-| `bigint` | `9007199254740991n` | Целые числа произвольной точности |
+| Type | Examples | Description |
+|------|---------|-------------|
+| `number` | `42`, `3.14`, `NaN`, `Infinity` | Integer and floating-point numbers |
+| `string` | `'hello'`, `"hi"`, `` `template` `` | Text |
+| `boolean` | `true`, `false` | Logical values |
+| `null` | `null` | Intentional absence of a value |
+| `undefined` | `undefined` | Variable declared but not initialized |
+| `symbol` | `Symbol('id')` | Unique identifier |
+| `bigint` | `9007199254740991n` | Arbitrary-precision integers |
 
-### Объектные типы
+### Object Types
 
 ```js
 const arr  = [1, 2, 3];            // Array
@@ -188,47 +188,47 @@ const map  = new Map();            // Map
 const set  = new Set([1, 2, 3]);   // Set
 ```
 
-### Область видимости (Scope)
+### Variable Scoping
 
 ```js
-var x = 1;          // глобальная / function scope
+var x = 1;          // global / function scope
 
 function demo() {
-  var x = 2;        // function scope — не видна снаружи
+  var x = 2;        // function scope — not visible outside
   let y = 3;        // block scope
   const z = 4;      // block scope
 
   if (true) {
-    var a = 10;     // var просачивается в функцию!
-    let b = 20;     // b видна только в этом блоке
+    var a = 10;     // var leaks into the function!
+    let b = 20;     // b is only visible inside this block
     console.log(b); // 20
   }
-  console.log(a);   // 10 — var утекла из if
+  console.log(a);   // 10 — var leaked out of the if block
   // console.log(b); // ReferenceError
 }
 ```
 
-### Подъём (Hoisting)
+### Hoisting
 
 ```js
-console.log(name);   // undefined (var поднят, но не инициализирован)
+console.log(name);   // undefined (var is hoisted but not initialized)
 var name = 'Alice';
 
-// console.log(age); // ReferenceError — let/const не инициализируются до объявления
+// console.log(age); // ReferenceError — let/const are not initialized before their declaration
 let age = 25;
 ```
 
 ---
 
-## 4. Концепции функционального программирования
+## 4. Functional Programming Concepts
 
-### Чистые функции
+### Pure Functions
 
 ```js
-// Чистая: результат зависит только от аргументов, нет побочных эффектов
+// Pure: result depends only on arguments, no side effects
 const add = (a, b) => a + b;
 
-// Нечистая: меняет внешнее состояние
+// Impure: modifies external state
 let count = 0;
 const increment = () => { count++; };
 ```
@@ -242,19 +242,19 @@ const students = [
   { name: 'Carol', grade: 92 },
 ];
 
-// map — преобразование каждого элемента
+// map — transform each element
 const names = students.map(s => s.name);
 // ['Alice', 'Bob', 'Carol']
 
-// filter — отбор элементов по условию
+// filter — select elements by condition
 const passed = students.filter(s => s.grade >= 60);
 // [Alice(85), Carol(92)]
 
-// reduce — свёртка массива в одно значение
+// reduce — fold the array into a single value
 const total = students.reduce((sum, s) => sum + s.grade, 0);
 const avg   = total / students.length;
 
-// Цепочка методов
+// Method chaining
 const topNames = students
   .filter(s => s.grade >= 80)
   .map(s => s.name)
@@ -262,7 +262,7 @@ const topNames = students
 // ['Alice', 'Carol']
 ```
 
-### Замыкания (Closures)
+### Closures
 
 ```js
 function makeCounter(start = 0) {
@@ -282,9 +282,9 @@ counter.value();     // 12
 
 ---
 
-## 5. Работа с JSON
+## 5. Working with JSON
 
-**JSON (JavaScript Object Notation)** — текстовый формат обмена данными.
+**JSON (JavaScript Object Notation)** — a text-based data exchange format.
 
 ```json
 {
@@ -293,65 +293,65 @@ counter.value();     // 12
   "age": 25,
   "courses": ["Math", "Physics"],
   "address": {
-    "city": "Алматы",
+    "city": "Almaty",
     "zip": "050000"
   }
 }
 ```
 
-### Сериализация и десериализация
+### Serialization and Deserialization
 
 ```js
-// Объект → JSON-строка
+// Object → JSON string
 const user = { name: 'Alice', age: 25 };
 const json = JSON.stringify(user);
 // '{"name":"Alice","age":25}'
 
-// Красивый вывод
+// Pretty-print
 const pretty = JSON.stringify(user, null, 2);
 
-// JSON-строка → объект
+// JSON string → object
 const parsed = JSON.parse(json);
 console.log(parsed.name); // 'Alice'
 ```
 
-### Распространённые ошибки
+### Common Pitfalls
 
 ```js
-// JSON не поддерживает:
-JSON.stringify({ fn: () => {} });   // функции игнорируются
-JSON.stringify({ d: new Date() });  // Date → строка ISO
-JSON.stringify({ a: undefined });   // undefined игнорируется
+// JSON does not support:
+JSON.stringify({ fn: () => {} });   // functions are ignored
+JSON.stringify({ d: new Date() });  // Date → ISO string
+JSON.stringify({ a: undefined });   // undefined is ignored
 
-// Защита от ошибок парсинга
+// Guard against parse errors
 try {
   const data = JSON.parse(maybeInvalidJson);
 } catch (e) {
-  console.error('Некорректный JSON:', e.message);
+  console.error('Invalid JSON:', e.message);
 }
 ```
 
 ---
 
-## 6. Работа с DOM
+## 6. DOM Manipulation
 
-**DOM (Document Object Model)** — программный интерфейс к HTML-документу в виде дерева объектов.
+**DOM (Document Object Model)** — a programmatic interface to the HTML document as a tree of objects.
 
-### Выбор элементов
+### Selecting Elements
 
 ```js
-const btn   = document.querySelector('#submit-btn');     // первый элемент
-const items = document.querySelectorAll('.list-item');   // NodeList всех элементов
+const btn   = document.querySelector('#submit-btn');     // first matching element
+const items = document.querySelectorAll('.list-item');   // NodeList of all matches
 const form  = document.getElementById('contact-form');
 ```
 
-### Изменение содержимого и классов
+### Changing Content and Classes
 
 ```js
 const el = document.querySelector('.card');
 
-el.textContent = 'Новый текст';       // только текст (безопасно)
-el.innerHTML   = '<strong>Жирный</strong>'; // HTML (осторожно — XSS!)
+el.textContent = 'New text';              // plain text (safe)
+el.innerHTML   = '<strong>Bold</strong>'; // HTML markup (watch out for XSS!)
 
 el.classList.add('active');
 el.classList.remove('hidden');
@@ -359,26 +359,26 @@ el.classList.toggle('expanded');
 el.classList.contains('active');   // true / false
 ```
 
-### Создание и удаление элементов
+### Creating and Removing Elements
 
 ```js
-// Создать
+// Create
 const li = document.createElement('li');
-li.textContent = 'Новый пункт';
+li.textContent = 'New item';
 li.classList.add('list-item');
 
-// Добавить в DOM
+// Insert into the DOM
 const ul = document.querySelector('ul');
-ul.appendChild(li);          // в конец
-ul.prepend(li);              // в начало
-ul.insertBefore(li, target); // перед элементом
+ul.appendChild(li);          // append at the end
+ul.prepend(li);              // insert at the beginning
+ul.insertBefore(li, target); // insert before a specific element
 
-// Удалить
+// Remove
 li.remove();
 ul.removeChild(li);
 ```
 
-### Атрибуты и стили
+### Attributes and Inline Styles
 
 ```js
 img.setAttribute('src', 'photo.jpg');
@@ -392,7 +392,7 @@ el.style.display      = 'none';
 
 ---
 
-## 7. Обработка событий
+## 7. Event Handling
 
 ### `addEventListener`
 
@@ -400,35 +400,35 @@ el.style.display      = 'none';
 const btn = document.querySelector('#btn');
 
 btn.addEventListener('click', function(event) {
-  console.log('Нажали!', event.target);
+  console.log('Clicked!', event.target);
 });
 
-// Стрелочная функция
+// Arrow function
 btn.addEventListener('click', (e) => {
-  e.preventDefault();   // отмена действия по умолчанию (напр., отправка формы)
-  e.stopPropagation();  // остановить всплытие события
+  e.preventDefault();   // cancel default action (e.g., form submission)
+  e.stopPropagation();  // stop the event from bubbling up
 });
 ```
 
-### Часто используемые события
+### Common Events
 
-| Событие | Описание |
-|---------|----------|
-| `click` | Клик мышью |
-| `dblclick` | Двойной клик |
-| `mouseover` / `mouseout` | Наведение / уход курсора |
-| `keydown` / `keyup` | Нажатие / отпускание клавиши |
-| `input` | Изменение значения поля ввода |
-| `change` | Изменение значения (после потери фокуса) |
-| `submit` | Отправка формы |
-| `focus` / `blur` | Получение / потеря фокуса |
-| `DOMContentLoaded` | DOM готов (без ожидания картинок) |
-| `load` | Страница полностью загружена |
+| Event | Description |
+|-------|-------------|
+| `click` | Mouse click |
+| `dblclick` | Double click |
+| `mouseover` / `mouseout` | Mouse enter / leave |
+| `keydown` / `keyup` | Key pressed / released |
+| `input` | Input field value changed |
+| `change` | Value changed (after losing focus) |
+| `submit` | Form submitted |
+| `focus` / `blur` | Element gained / lost focus |
+| `DOMContentLoaded` | DOM ready (without waiting for images) |
+| `load` | Page fully loaded |
 
-### Делегирование событий
+### Event Delegation
 
 ```js
-// Один обработчик на контейнер вместо обработчика на каждый дочерний элемент
+// One handler on the container instead of one on every child
 document.querySelector('ul').addEventListener('click', (e) => {
   if (e.target.matches('li')) {
     e.target.classList.toggle('done');
@@ -436,27 +436,27 @@ document.querySelector('ul').addEventListener('click', (e) => {
 });
 ```
 
-### Таймеры
+### Timers
 
 ```js
-// Выполнить один раз через 2 секунды
+// Run once after 2 seconds
 const timeoutId = setTimeout(() => {
-  console.log('2 секунды прошло');
+  console.log('2 seconds elapsed');
 }, 2000);
-clearTimeout(timeoutId);   // отменить
+clearTimeout(timeoutId);   // cancel
 
-// Выполнять каждую секунду
+// Run every second
 const intervalId = setInterval(() => {
   console.log(new Date().toLocaleTimeString());
 }, 1000);
-clearInterval(intervalId); // остановить
+clearInterval(intervalId); // stop
 ```
 
 ---
 
-## 8. Манипуляции с HTML-элементами
+## 8. HTML Element Manipulation
 
-### Практический пример: To-Do список
+### Practical Example: To-Do List
 
 ```js
 const input  = document.querySelector('#task-input');
@@ -470,13 +470,13 @@ addBtn.addEventListener('click', () => {
   const li = document.createElement('li');
   li.textContent = text;
 
-  // Кнопка удаления
+  // Delete button
   const del = document.createElement('button');
   del.textContent = '✕';
   del.addEventListener('click', () => li.remove());
   li.appendChild(del);
 
-  // Отметить как выполненное
+  // Toggle as done on click
   li.addEventListener('click', () => li.classList.toggle('done'));
 
   list.appendChild(li);
@@ -484,7 +484,7 @@ addBtn.addEventListener('click', () => {
   input.focus();
 });
 
-// Отправка по Enter
+// Submit on Enter
 input.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') addBtn.click();
 });
@@ -492,20 +492,20 @@ input.addEventListener('keydown', (e) => {
 
 ---
 
-## Шпаргалка
+## Cheat Sheet
 
-| Метод | Описание |
-|-------|----------|
-| `document.querySelector(sel)` | Найти первый элемент |
-| `document.querySelectorAll(sel)` | Найти все элементы |
-| `el.classList.add/remove/toggle` | Управление классами |
-| `el.textContent` | Текстовое содержимое |
-| `el.innerHTML` | HTML-содержимое (осторожно) |
-| `document.createElement(tag)` | Создать элемент |
-| `parent.appendChild(child)` | Добавить дочерний элемент |
-| `el.remove()` | Удалить элемент из DOM |
-| `el.addEventListener(ev, fn)` | Подписаться на событие |
-| `e.preventDefault()` | Отменить дефолтное действие |
-| `e.stopPropagation()` | Остановить всплытие |
-| `JSON.stringify(obj)` | Объект → JSON-строка |
-| `JSON.parse(str)` | JSON-строка → объект |
+| Method | Description |
+|--------|-------------|
+| `document.querySelector(sel)` | Find the first matching element |
+| `document.querySelectorAll(sel)` | Find all matching elements |
+| `el.classList.add/remove/toggle` | Manage CSS classes |
+| `el.textContent` | Get/set text content |
+| `el.innerHTML` | Get/set HTML content (use with care) |
+| `document.createElement(tag)` | Create a new element |
+| `parent.appendChild(child)` | Append a child element |
+| `el.remove()` | Remove element from the DOM |
+| `el.addEventListener(ev, fn)` | Subscribe to an event |
+| `e.preventDefault()` | Cancel the default action |
+| `e.stopPropagation()` | Stop event bubbling |
+| `JSON.stringify(obj)` | Object → JSON string |
+| `JSON.parse(str)` | JSON string → object |

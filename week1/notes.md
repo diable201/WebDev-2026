@@ -1,42 +1,42 @@
-# Конспект — Неделя 1: Введение в Web-разработку
+# Notes — Week 1: Introduction to Web Development
 
-## 1. Что такое веб-сайт?
+## 1. What is a Website?
 
-**Веб-сайт** — это набор связанных веб-страниц, доступных по одному доменному имени и размещённых на веб-сервере.
+A **website** is a collection of related web pages accessible under a single domain name and hosted on a web server.
 
-| Тип сайта | Описание | Пример |
-|-----------|----------|--------|
-| **Статический** | HTML/CSS/JS-файлы отдаются браузеру без изменений | Документация, портфолио |
-| **Динамический** | Содержимое генерируется на сервере под каждый запрос | Интернет-магазин, соц. сеть |
-| **SPA** (Single-Page Application) | Одна HTML-страница, контент меняется через JS без перезагрузки | Gmail, Trello |
+| Type | Description | Examples |
+|------|-------------|---------|
+| **Static** | HTML/CSS/JS files are served to the browser as-is | Documentation, portfolio |
+| **Dynamic** | Content is generated on the server for each request | Online store, social network |
+| **SPA** (Single-Page Application) | A single HTML page; content changes via JS without reloading | Gmail, Trello |
 
-**Как браузер отображает страницу:**
-1. Загружает HTML → строит **DOM** (Document Object Model)
-2. Загружает CSS → строит **CSSOM**
-3. Объединяет в **Render Tree** → вычисляет Layout → рисует (Paint)
+**How a browser renders a page:**
+1. Downloads HTML → builds the **DOM** (Document Object Model)
+2. Downloads CSS → builds the **CSSOM**
+3. Combines them into the **Render Tree** → calculates Layout → paints (Paint)
 
 ---
 
-## 2. Как работает Web?
+## 2. How Does the Web Work?
 
-### Ключевые понятия
+### Key Concepts
 
-- **DNS (Domain Name System)** — переводит доменное имя (`example.com`) в IP-адрес (`93.184.216.34`).
-- **IP-адрес** — уникальный числовой адрес устройства в сети.
-- **TCP/IP** — транспортный протокол, обеспечивающий надёжную доставку пакетов.
-- **HTTP/HTTPS** — протокол прикладного уровня для передачи гипертекста; HTTPS добавляет шифрование (TLS).
+- **DNS (Domain Name System)** — translates a domain name (`example.com`) into an IP address (`93.184.216.34`).
+- **IP address** — a unique numerical address of a device on the network.
+- **TCP/IP** — a transport protocol that ensures reliable delivery of data packets.
+- **HTTP/HTTPS** — an application-layer protocol for transferring hypertext; HTTPS adds encryption (TLS).
 
-### Цикл запрос → ответ (Request-Response)
+### Request-Response Cycle
 
 ```
-Браузер                         Сервер
+Browser                          Server
   |                                |
-  |--- DNS-запрос: example.com --->|  (DNS-сервер возвращает IP)
+  |--- DNS query: example.com ---->|  (DNS server returns IP)
   |<-- IP: 93.184.216.34 ----------|
   |                                |
   |--- TCP SYN ---------------------->|
   |<-- TCP SYN-ACK -------------------|
-  |--- TCP ACK ----------------------->|  (соединение установлено)
+  |--- TCP ACK ----------------------->|  (connection established)
   |                                |
   |--- GET / HTTP/1.1 ------------->|
   |    Host: example.com           |
@@ -45,153 +45,153 @@
   |    <html>...</html>            |
 ```
 
-### HTTP-методы
+### HTTP Methods
 
-| Метод | Назначение |
-|-------|-----------|
-| `GET` | Получить ресурс |
-| `POST` | Создать ресурс / отправить данные |
-| `PUT` / `PATCH` | Обновить ресурс (полностью / частично) |
-| `DELETE` | Удалить ресурс |
+| Method | Purpose |
+|--------|---------|
+| `GET` | Retrieve a resource |
+| `POST` | Create a resource / submit data |
+| `PUT` / `PATCH` | Update a resource (fully / partially) |
+| `DELETE` | Delete a resource |
 
-### HTTP-коды ответа
+### HTTP Response Codes
 
-| Диапазон | Значение | Пример |
-|----------|----------|--------|
-| 2xx | Успех | `200 OK`, `201 Created` |
-| 3xx | Перенаправление | `301 Moved Permanently`, `304 Not Modified` |
-| 4xx | Ошибка клиента | `400 Bad Request`, `401 Unauthorized`, `404 Not Found` |
-| 5xx | Ошибка сервера | `500 Internal Server Error`, `503 Service Unavailable` |
+| Range | Meaning | Examples |
+|-------|---------|---------|
+| 2xx | Success | `200 OK`, `201 Created` |
+| 3xx | Redirect | `301 Moved Permanently`, `304 Not Modified` |
+| 4xx | Client error | `400 Bad Request`, `401 Unauthorized`, `404 Not Found` |
+| 5xx | Server error | `500 Internal Server Error`, `503 Service Unavailable` |
 
 ---
 
-## 3. Client-side vs. Server-side технологии
+## 3. Client-side vs. Server-side Technologies
 
-### Client-side (фронтенд)
+### Client-side (Frontend)
 
-Код выполняется **в браузере** пользователя.
+Code runs **in the user's browser**.
 
-| Технология | Роль |
+| Technology | Role |
 |-----------|------|
-| **HTML** | Структура документа |
-| **CSS** | Внешний вид и оформление |
-| **JavaScript** | Интерактивность, бизнес-логика на стороне клиента |
-| Фреймворки | Angular, React, Vue — ускоряют разработку UI |
+| **HTML** | Document structure |
+| **CSS** | Visual appearance and styling |
+| **JavaScript** | Interactivity, client-side business logic |
+| Frameworks | Angular, React, Vue — speed up UI development |
 
-### Server-side (бэкенд)
+### Server-side (Backend)
 
-Код выполняется **на сервере**, клиент получает только результат.
+Code runs **on the server**; the client only receives the result.
 
-| Технология | Язык |
-|-----------|------|
+| Technology | Language |
+|-----------|----------|
 | Node.js / Express | JavaScript |
 | Django | Python |
 | Spring Boot | Java |
 | Laravel | PHP |
 | ASP.NET Core | C# |
 
-### Сравнение подходов
+### Comparison
 
 ```
 Client-side                 Server-side
 ───────────────────         ───────────────────
-+ Быстрый отклик UI         + Безопасность данных
-+ Меньше запросов к серверу + SEO (поисковая индексация)
-- Логика видна в DevTools   - Задержка (round-trip)
-- Нагружает устройство клиента
++ Fast UI response          + Data security
++ Fewer server round-trips  + SEO (search engine indexing)
+- Logic visible in DevTools - Latency (round-trip delay)
+- Loads the client device
 ```
 
 ---
 
-## 4. Фреймворки и библиотеки
+## 4. Frameworks & Libraries
 
-| Понятие | Определение | Пример |
-|---------|-------------|--------|
-| **Библиотека** | Набор готовых функций; разработчик сам управляет потоком выполнения | React, Lodash, Axios |
-| **Фреймворк** | Задаёт архитектуру приложения; фреймворк вызывает код разработчика («инверсия управления») | Angular, Django, Spring Boot |
+| Concept | Definition | Examples |
+|---------|-----------|---------|
+| **Library** | A set of ready-made functions; the developer controls the flow | React, Lodash, Axios |
+| **Framework** | Defines the application architecture; the framework calls your code ("inversion of control") | Angular, Django, Spring Boot |
 
-> **Принцип инверсии управления (IoC):** «Не звони нам — мы позвоним тебе». Фреймворк вызывает ваш код в нужный момент.
-
----
-
-## 5. Сравнение бэкенд-фреймворков
-
-| Фреймворк | Язык | Производительность | Кривая обучения | Применение |
-|-----------|------|-------------------|-----------------|-----------|
-| **Express.js** | JavaScript | Средняя | Низкая | Лёгкие API, микросервисы |
-| **NestJS** | TypeScript | Средняя | Средняя | Корпоративные приложения |
-| **Django** | Python | Средняя | Средняя | Быстрый прототип, ML-интеграция |
-| **FastAPI** | Python | Высокая | Низкая | REST API, ML-сервисы |
-| **Spring Boot** | Java | Высокая | Высокая | Энтерпрайз, банки, телеком |
-| **Laravel** | PHP | Средняя | Низкая | Сайты, интернет-магазины |
-
-**Как выбрать?**
-- Команда знает Python → Django / FastAPI
-- Нужна экосистема Node.js → Express / NestJS
-- Высокие нагрузки и Java-экспертиза → Spring Boot
+> **Inversion of Control (IoC):** "Don't call us — we'll call you." The framework invokes your code at the right moment.
 
 ---
 
-## 6. Базовые техники масштабирования
+## 5. Back-End Framework Comparison
 
-### Вертикальное масштабирование (Scale Up)
+| Framework | Language | Performance | Learning Curve | Use Cases |
+|-----------|----------|-------------|----------------|-----------|
+| **Express.js** | JavaScript | Medium | Low | Lightweight APIs, microservices |
+| **NestJS** | TypeScript | Medium | Medium | Enterprise applications |
+| **Django** | Python | Medium | Medium | Rapid prototyping, ML integration |
+| **FastAPI** | Python | High | Low | REST APIs, ML services |
+| **Spring Boot** | Java | High | High | Enterprise, banking, telecom |
+| **Laravel** | PHP | Medium | Low | Websites, online stores |
 
-Увеличение мощности одного сервера (больше CPU, RAM).
-
-```
-[Сервер 1: 8 CPU] → [Сервер 1: 32 CPU]
-```
-
-- ✅ Просто в настройке
-- ❌ Физический предел; одна точка отказа
-
-### Горизонтальное масштабирование (Scale Out)
-
-Добавление новых серверов.
-
-```
-                 ┌─ Сервер 1 ─┐
-Клиент → Балансировщик нагрузки ─┼─ Сервер 2 ─┤ ← База данных
-                 └─ Сервер 3 ─┘
-```
-
-- ✅ Линейный рост; отказоустойчивость
-- ❌ Сложнее архитектура (сессии, согласованность данных)
-
-### Балансировщик нагрузки (Load Balancer)
-
-Распределяет запросы между несколькими серверами. Алгоритмы:
-- **Round Robin** — по очереди
-- **Least Connections** — на сервер с наименьшим числом соединений
-- **IP Hash** — один клиент всегда попадает на один сервер (sticky session)
-
-### Кэширование
-
-| Уровень | Инструмент | Что кэшируем |
-|---------|-----------|--------------|
-| Браузер | HTTP-заголовки `Cache-Control` | Статика (CSS, JS, изображения) |
-| CDN | Cloudflare, Akamai | Статические ресурсы близко к пользователю |
-| Приложение | Redis, Memcached | Результаты запросов к БД, сессии |
-| БД | Query Cache, индексы | Результаты сложных SQL-запросов |
+**How to choose?**
+- Team knows Python → Django / FastAPI
+- Need the Node.js ecosystem → Express / NestJS
+- High load and Java expertise → Spring Boot
 
 ---
 
-## 7. Что такое API?
+## 6. Basic Scaling Techniques
 
-**API (Application Programming Interface)** — интерфейс, через который одна программа взаимодействует с другой.
+### Vertical Scaling (Scale Up)
+
+Increasing the power of a single server (more CPU, RAM).
+
+```
+[Server 1: 8 CPU] → [Server 1: 32 CPU]
+```
+
+- ✅ Simple to set up
+- ❌ Physical limits; single point of failure
+
+### Horizontal Scaling (Scale Out)
+
+Adding more servers.
+
+```
+               ┌─ Server 1 ─┐
+Client → Load Balancer ─────┼─ Server 2 ─┤ ← Database
+               └─ Server 3 ─┘
+```
+
+- ✅ Linear growth; fault tolerance
+- ❌ More complex architecture (sessions, data consistency)
+
+### Load Balancer
+
+Distributes requests across multiple servers. Common algorithms:
+- **Round Robin** — requests are distributed in turn
+- **Least Connections** — routes to the server with the fewest active connections
+- **IP Hash** — the same client always reaches the same server (sticky session)
+
+### Caching
+
+| Level | Tool | What is cached |
+|-------|------|---------------|
+| Browser | `Cache-Control` HTTP headers | Static assets (CSS, JS, images) |
+| CDN | Cloudflare, Akamai | Static resources close to the user |
+| Application | Redis, Memcached | DB query results, sessions |
+| DB | Query Cache, indexes | Results of complex SQL queries |
+
+---
+
+## 7. What is an API?
+
+**API (Application Programming Interface)** — an interface through which one program communicates with another.
 
 ### REST API
 
-**REST (Representational State Transfer)** — архитектурный стиль, основанный на HTTP:
+**REST (Representational State Transfer)** — an architectural style based on HTTP:
 
-| Принцип | Описание |
-|---------|----------|
-| **Stateless** | Каждый запрос независим; сервер не хранит состояние клиента |
-| **Uniform Interface** | Единые правила формирования URL и методов |
-| **Ресурсы** | Данные идентифицируются URL-ами (`/users/42`) |
-| **Представления** | Ресурс может передаваться в разных форматах (JSON, XML) |
+| Principle | Description |
+|-----------|-------------|
+| **Stateless** | Each request is independent; the server stores no client state |
+| **Uniform Interface** | Consistent rules for forming URLs and using methods |
+| **Resources** | Data is identified by URLs (`/users/42`) |
+| **Representations** | A resource can be transferred in different formats (JSON, XML) |
 
-### Структура REST-запроса
+### REST Request Structure
 
 ```http
 GET /api/users/42 HTTP/1.1
@@ -200,7 +200,7 @@ Authorization: Bearer <token>
 Accept: application/json
 ```
 
-### Структура REST-ответа
+### REST Response Structure
 
 ```http
 HTTP/1.1 200 OK
@@ -213,7 +213,7 @@ Content-Type: application/json
 }
 ```
 
-### JSON как формат обмена данными
+### JSON as a Data Exchange Format
 
 ```json
 {
@@ -224,27 +224,27 @@ Content-Type: application/json
 }
 ```
 
-### Типы API
+### API Types
 
-| Тип | Описание |
-|-----|----------|
-| **REST** | Наиболее распространён; использует HTTP-методы |
-| **GraphQL** | Клиент сам описывает нужные поля; гибкие запросы |
-| **gRPC** | Высокая производительность; бинарный протокол (Protocol Buffers) |
-| **WebSocket** | Двунаправленное соединение в реальном времени |
+| Type | Description |
+|------|-------------|
+| **REST** | Most widely used; leverages HTTP methods |
+| **GraphQL** | The client specifies exactly which fields it needs; flexible queries |
+| **gRPC** | High performance; binary protocol (Protocol Buffers) |
+| **WebSocket** | Bidirectional real-time connection |
 
 ---
 
-## Ключевые термины
+## Key Terms
 
-| Термин | Определение |
-|--------|-------------|
-| DNS | Система доменных имён |
-| HTTP/HTTPS | Протокол передачи гипертекста (S = Secure) |
-| DOM | Объектная модель документа |
-| SPA | Одностраничное приложение |
-| REST | Архитектурный стиль для API |
-| API | Интерфейс взаимодействия программ |
-| CDN | Сеть доставки контента |
-| Load Balancer | Балансировщик нагрузки |
-| Кэш | Временное хранилище для ускорения доступа к данным |
+| Term | Definition |
+|------|-----------|
+| DNS | Domain Name System |
+| HTTP/HTTPS | Hypertext Transfer Protocol (S = Secure) |
+| DOM | Document Object Model |
+| SPA | Single-Page Application |
+| REST | Architectural style for APIs |
+| API | Application Programming Interface |
+| CDN | Content Delivery Network |
+| Load Balancer | Distributes incoming traffic across multiple servers |
+| Cache | Temporary storage for faster data access |

@@ -1,10 +1,10 @@
-# Конспект — Неделя 5: Компоненты Angular
+# Notes — Week 5: Angular Components
 
-## 1. Свойства компонента (Component Properties)
+## 1. Component Properties
 
 ### Signal-based API (Angular 17+)
 
-Начиная с Angular 17, рекомендуется использовать **сигналы** для входных и выходных данных компонента.
+Starting from Angular 17, **signals** are the recommended way to handle component inputs and outputs.
 
 ```typescript
 import { Component, input, output } from '@angular/core';
@@ -15,14 +15,14 @@ import { Component, input, output } from '@angular/core';
   templateUrl: './student-card.component.html',
 })
 export class StudentCardComponent {
-  // Входное свойство (обязательное)
+  // Required input property
   student = input.required<Student>();
 
-  // Входное свойство с значением по умолчанию
+  // Input property with a default value
   isHighlighted = input<boolean>(false);
 
-  // Выходное событие
-  remove  = output<number>();   // передаёт id студента
+  // Output events
+  remove  = output<number>();   // emits the student's id
   gradeUp = output<number>();
 
   onRemove() {
@@ -35,7 +35,7 @@ export class StudentCardComponent {
 }
 ```
 
-### Использование компонента в родителе
+### Using the Component in a Parent
 
 ```html
 <!-- app.component.html -->
@@ -47,7 +47,7 @@ export class StudentCardComponent {
 />
 ```
 
-### Устаревший API (для понимания старого кода)
+### Legacy API (for understanding older code)
 
 ```typescript
 import { Component, Input, Output, EventEmitter } from '@angular/core';
@@ -55,7 +55,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({ selector: 'app-old', ... })
 export class OldComponent {
   @Input()  title = '';
-  @Input()  required_value!: string;   // ! — гарантируем наличие
+  @Input()  required_value!: string;   // ! — we guarantee a value will be provided
 
   @Output() clicked = new EventEmitter<string>();
 
@@ -67,38 +67,38 @@ export class OldComponent {
 
 ---
 
-## 2. Привязка данных (Data Binding)
+## 2. Data Binding
 
-Angular поддерживает четыре вида привязки данных.
+Angular supports four types of data binding.
 
-### 1. Интерполяция — `{{ выражение }}`
+### 1. Interpolation — `{{ expression }}`
 
-Выводит значение TypeScript-выражения как текст в HTML.
+Renders the value of a TypeScript expression as text in the HTML template.
 
 ```html
 <h1>{{ title }}</h1>
 <p>{{ 2 + 2 }}</p>
 <p>{{ student.name.toUpperCase() }}</p>
-<p>{{ isLoading ? 'Загрузка...' : 'Готово' }}</p>
+<p>{{ isLoading ? 'Loading...' : 'Ready' }}</p>
 ```
 
-### 2. Привязка свойства — `[свойство]="выражение"`
+### 2. Property Binding — `[property]="expression"`
 
-Передаёт значение из класса в свойство DOM-элемента или Input дочернего компонента.
+Passes a value from the class to a DOM element property or a child component's Input.
 
 ```html
 <img [src]="avatarUrl" [alt]="student.name" />
-<button [disabled]="isLoading">Отправить</button>
+<button [disabled]="isLoading">Submit</button>
 <input [value]="searchTerm" />
 <app-card [title]="pageTitle" />
 ```
 
-### 3. Привязка события — `(событие)="обработчик($event)"`
+### 3. Event Binding — `(event)="handler($event)"`
 
-Вызывает метод класса при наступлении DOM-события.
+Calls a class method when a DOM event occurs.
 
 ```html
-<button (click)="addStudent()">Добавить</button>
+<button (click)="addStudent()">Add</button>
 <input (input)="onSearch($event)" (keydown.enter)="submit()" />
 <form (submit)="onSubmit($event)">...</form>
 ```
@@ -109,12 +109,12 @@ onSearch(event: Event) {
 }
 ```
 
-### 4. Двусторонняя привязка — `[(ngModel)]`
+### 4. Two-way Binding — `[(ngModel)]`
 
-Синхронизирует значение между полем ввода и свойством класса в обоих направлениях.
+Keeps the value of an input field and a class property in sync in both directions.
 
 ```typescript
-// Необходимо импортировать FormsModule
+// FormsModule must be imported
 @Component({
   standalone: true,
   imports: [FormsModule],
@@ -126,35 +126,35 @@ export class AppComponent {
 ```
 
 ```html
-<input [(ngModel)]="searchTerm" placeholder="Поиск..." />
-<p>Вы ищете: {{ searchTerm }}</p>
+<input [(ngModel)]="searchTerm" placeholder="Search..." />
+<p>You are searching for: {{ searchTerm }}</p>
 ```
 
-> `[(ngModel)]` — это «синтаксический сахар»: под капотом это `[ngModel]="searchTerm"` + `(ngModelChange)="searchTerm = $event"`.
+> `[(ngModel)]` is "syntactic sugar": under the hood it is `[ngModel]="searchTerm"` + `(ngModelChange)="searchTerm = $event"`.
 
-### Сводная таблица
+### Summary Table
 
-| Вид привязки | Синтаксис | Направление | Пример |
-|-------------|-----------|-------------|--------|
-| Интерполяция | `{{ }}` | Класс → Template | `{{ title }}` |
-| Свойство | `[prop]` | Класс → Template | `[disabled]="isLoading"` |
-| Событие | `(event)` | Template → Класс | `(click)="save()"` |
-| Двусторонняя | `[(ngModel)]` | Оба направления | `[(ngModel)]="name"` |
+| Binding Type | Syntax | Direction | Example |
+|-------------|--------|-----------|---------|
+| Interpolation | `{{ }}` | Class → Template | `{{ title }}` |
+| Property | `[prop]` | Class → Template | `[disabled]="isLoading"` |
+| Event | `(event)` | Template → Class | `(click)="save()"` |
+| Two-way | `[(ngModel)]` | Both directions | `[(ngModel)]="name"` |
 
 ---
 
-## 3. Шаблоны и стили
+## 3. Templates and Styles
 
-### Шаблон компонента
+### Component Template
 
 ```typescript
-// Вариант 1: внешний файл (рекомендуется для сложных шаблонов)
+// Option 1: external file (recommended for complex templates)
 @Component({
   templateUrl: './app.component.html',
   styleUrl:    './app.component.css',
 })
 
-// Вариант 2: встроенный шаблон (для простых компонентов)
+// Option 2: inline template (suitable for simple components)
 @Component({
   template: `
     <div class="card">
@@ -167,34 +167,34 @@ export class AppComponent {
 })
 ```
 
-### Новый синтаксис управляющих конструкций (Angular 17+)
+### New Template Control Flow Syntax (Angular 17+)
 
 ```html
-<!-- Условный рендеринг @if / @else if / @else -->
+<!-- Conditional rendering with @if / @else if / @else -->
 @if (students.length > 0) {
   <ul>
     @for (student of filteredStudents; track student.id) {
       <li>{{ student.name }} — {{ student.grade }}</li>
     } @empty {
-      <li>Нет результатов</li>
+      <li>No results found</li>
     }
   </ul>
 } @else {
-  <p>Список студентов пуст</p>
+  <p>The student list is empty</p>
 }
 
 <!-- switch -->
 @switch (status) {
-  @case ('active')  { <span class="badge green">Активен</span> }
-  @case ('banned')  { <span class="badge red">Заблокирован</span> }
-  @default          { <span class="badge grey">Неизвестно</span> }
+  @case ('active')  { <span class="badge green">Active</span> }
+  @case ('banned')  { <span class="badge red">Banned</span> }
+  @default          { <span class="badge grey">Unknown</span> }
 }
 ```
 
-### Устаревший синтаксис (с `*ngIf` и `*ngFor`)
+### Legacy Syntax (with `*ngIf` and `*ngFor`)
 
 ```html
-<!-- Старый стиль (ещё встречается в проектах) -->
+<!-- Old style (still found in existing projects) -->
 <ul *ngIf="students.length > 0">
   <li *ngFor="let student of students; trackBy: trackById">
     {{ student.name }}
@@ -202,72 +202,72 @@ export class AppComponent {
 </ul>
 ```
 
-### Компонентные стили (Component Scoped CSS)
+### Component-Scoped Styles
 
-По умолчанию стили Angular-компонента **не просачиваются** в другие компоненты (инкапсуляция через атрибуты `_nghost` / `_ngcontent`).
+By default, Angular component styles **do not leak** into other components (encapsulation via `_nghost` / `_ngcontent` attributes).
 
 ```css
 /* student-card.component.css */
-/* Эти стили применяются ТОЛЬКО к StudentCardComponent */
+/* These styles apply ONLY to StudentCardComponent */
 .card {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1rem;
 }
 
-/* :host — ссылается на корневой элемент компонента */
+/* :host — refers to the component's host element */
 :host {
   display: block;
   margin-bottom: 1rem;
 }
 
-/* :host-context — применяется, если у родителя есть класс */
+/* :host-context — applied when a parent has the given class */
 :host-context(.dark-theme) .card {
   background: #1e1e2e;
 }
 ```
 
-### Настройки инкапсуляции стилей
+### Style Encapsulation Options
 
 ```typescript
 import { ViewEncapsulation } from '@angular/core';
 
 @Component({
-  encapsulation: ViewEncapsulation.Emulated,  // по умолчанию — атрибуты
-  // encapsulation: ViewEncapsulation.None,   // глобальные стили
-  // encapsulation: ViewEncapsulation.ShadowDom, // нативный Shadow DOM
+  encapsulation: ViewEncapsulation.Emulated,  // default — attribute-based scoping
+  // encapsulation: ViewEncapsulation.None,   // global styles
+  // encapsulation: ViewEncapsulation.ShadowDom, // native Shadow DOM
 })
 ```
 
 ---
 
-## 4. Хуки жизненного цикла (Lifecycle Hooks)
+## 4. Lifecycle Hooks
 
-Компонент Angular проходит через несколько фаз, на каждой из которых можно выполнить код.
+An Angular component passes through several phases, and you can run code at each one.
 
-### Полный жизненный цикл
+### Full Lifecycle
 
 ```
 constructor()
      ↓
-ngOnChanges()   ← вызывается при каждом изменении @Input/@input()
+ngOnChanges()   ← called on every @Input / input() change
      ↓
-ngOnInit()      ← компонент инициализирован, Input-значения доступны
+ngOnInit()      ← component initialized; Input values are available
      ↓
-ngDoCheck()     ← каждый цикл обнаружения изменений (редко нужен)
+ngDoCheck()     ← every change-detection cycle (rarely needed)
      ↓
-ngAfterContentInit()    ← ng-content проецирован
-ngAfterContentChecked() ← ng-content проверен
+ngAfterContentInit()    ← ng-content has been projected
+ngAfterContentChecked() ← ng-content has been checked
      ↓
-ngAfterViewInit()       ← DOM компонента и дочерних готов
-ngAfterViewChecked()    ← DOM компонента и дочерних проверен
+ngAfterViewInit()       ← component and child DOM is ready
+ngAfterViewChecked()    ← component and child DOM has been checked
      ↓
-ngOnDestroy()   ← компонент уничтожается, освобождаем ресурсы
+ngOnDestroy()   ← component is about to be destroyed; free resources
 ```
 
-### Наиболее используемые хуки
+### Most Commonly Used Hooks
 
-#### `ngOnInit` — инициализация
+#### `ngOnInit` — initialization
 
 ```typescript
 import { Component, OnInit, input } from '@angular/core';
@@ -280,8 +280,8 @@ export class StudentCardComponent implements OnInit {
   private timer?: ReturnType<typeof setInterval>;
 
   ngOnInit() {
-    // Вызывается один раз после первой привязки Input
-    // Здесь загружаем данные, запускаем таймеры и т.д.
+    // Called once after the first Input binding
+    // Good place to fetch data, start timers, etc.
     this.timer = setInterval(() => {
       this.secondsOnScreen++;
     }, 1000);
@@ -289,7 +289,7 @@ export class StudentCardComponent implements OnInit {
 }
 ```
 
-#### `ngOnChanges` — реакция на изменение Input
+#### `ngOnChanges` — react to Input changes
 
 ```typescript
 import { Component, OnChanges, SimpleChanges, input } from '@angular/core';
@@ -300,18 +300,18 @@ export class StudentCardComponent implements OnChanges {
   statusBadge = '';
 
   ngOnChanges(changes: SimpleChanges) {
-    // Вызывается при изменении любого @Input (или input())
+    // Called whenever any @Input (or input()) value changes
     if (changes['student']) {
       const grade = this.student().grade;
-      this.statusBadge = grade >= 60 ? '✅ Зачёт' : '❌ Незачёт';
+      this.statusBadge = grade >= 60 ? '✅ Pass' : '❌ Fail';
     }
   }
 }
 ```
 
-> **Примечание:** При использовании `input()` (сигналы) рекомендуется использовать `effect()` или `computed()` вместо `ngOnChanges`.
+> **Note:** When using `input()` signals, prefer `effect()` or `computed()` over `ngOnChanges`.
 
-#### `ngOnDestroy` — очистка ресурсов
+#### `ngOnDestroy` — clean up resources
 
 ```typescript
 import { Component, OnDestroy } from '@angular/core';
@@ -323,14 +323,14 @@ export class StudentCardComponent implements OnDestroy {
   private sub?: Subscription;
 
   ngOnDestroy() {
-    // ВАЖНО: очищайте таймеры и подписки, чтобы избежать утечек памяти
+    // IMPORTANT: clear timers and unsubscribe to avoid memory leaks
     clearInterval(this.timer);
     this.sub?.unsubscribe();
   }
 }
 ```
 
-### Пример: компонент с несколькими хуками
+### Full Example: Component with Multiple Hooks
 
 ```typescript
 @Component({
@@ -340,9 +340,9 @@ export class StudentCardComponent implements OnDestroy {
   template: `
     <div class="card" [ngClass]="{ 'pass': isPassing, 'fail': !isPassing }">
       <h3>{{ student().name }}</h3>
-      <p>Оценка: {{ student().grade }}</p>
-      <p>Статус: {{ statusBadge }}</p>
-      <p>На экране: {{ secondsOnScreen }}с</p>
+      <p>Grade: {{ student().grade }}</p>
+      <p>Status: {{ statusBadge }}</p>
+      <p>On screen: {{ secondsOnScreen }}s</p>
     </div>
   `,
 })
@@ -362,7 +362,7 @@ export class StudentCardComponent implements OnInit, OnChanges, OnDestroy {
     if (changes['student']) {
       const g = this.student().grade;
       this.isPassing   = g >= 60;
-      this.statusBadge = this.isPassing ? '✅ Зачёт' : '❌ Незачёт';
+      this.statusBadge = this.isPassing ? '✅ Pass' : '❌ Fail';
     }
   }
 
@@ -374,35 +374,35 @@ export class StudentCardComponent implements OnInit, OnChanges, OnDestroy {
 
 ---
 
-## Шпаргалка: хуки жизненного цикла
+## Cheat Sheet: Lifecycle Hooks
 
-| Хук | Когда вызывается | Типичное применение |
-|-----|-----------------|---------------------|
-| `ngOnChanges` | При каждом изменении Input | Пересчёт производных данных |
-| `ngOnInit` | Один раз после первого ngOnChanges | Загрузка данных, инициализация |
-| `ngDoCheck` | Каждый цикл обнаружения изменений | Ручная проверка (редко) |
-| `ngAfterContentInit` | После проекции `ng-content` | Работа с контентом |
-| `ngAfterViewInit` | После рендеринга DOM компонента | Работа с `@ViewChild` |
-| `ngOnDestroy` | Перед уничтожением компонента | Отписки, очистка таймеров |
+| Hook | When it is called | Typical use |
+|------|------------------|-------------|
+| `ngOnChanges` | On every Input change | Recalculate derived data |
+| `ngOnInit` | Once after the first ngOnChanges | Fetch data, initialization |
+| `ngDoCheck` | Every change-detection cycle | Manual checks (rare) |
+| `ngAfterContentInit` | After `ng-content` is projected | Work with projected content |
+| `ngAfterViewInit` | After the component's DOM is rendered | Work with `@ViewChild` |
+| `ngOnDestroy` | Before the component is destroyed | Unsubscribe, clear timers |
 
-## Шпаргалка: привязка данных
+## Cheat Sheet: Data Binding
 
 ```html
-<!-- Интерполяция -->
+<!-- Interpolation -->
 {{ expression }}
 
-<!-- Привязка свойства DOM -->
+<!-- DOM property binding -->
 [property]="expression"
 [class.active]="isActive"
 [style.color]="color"
 
-<!-- Привязка события -->
+<!-- Event binding -->
 (click)="handler()"
 (input)="onChange($event)"
 
-<!-- Двусторонняя привязка -->
+<!-- Two-way binding -->
 [(ngModel)]="property"
 
-<!-- Передача в дочерний компонент -->
+<!-- Pass to a child component -->
 <app-child [data]="value" (dataChange)="onDataChange($event)" />
 ```

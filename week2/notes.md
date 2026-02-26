@@ -1,54 +1,54 @@
-# Конспект — Неделя 2: Дорожная карта · HTML & CSS
+# Notes — Week 2: Web Development Roadmap · HTML & CSS
 
-## 1. Дорожная карта веб-разработчика
+## 1. Web Development Roadmap
 
-### Путь фронтенд-разработчика (2026)
+### Frontend Developer Path (2026)
 
 ```
-Основы
+Fundamentals
  ├─ HTML → CSS → JavaScript
  │
-Фронтенд-фреймворк
+Frontend Framework
  ├─ Angular / React / Vue
  │
-Инструменты
+Tooling
  ├─ Git, npm/yarn, Vite/Webpack
  │
-Дополнительно
+Additional
  ├─ TypeScript
- ├─ Тестирование (Jest, Cypress)
- └─ Базы данных (SQL/NoSQL — понимание)
+ ├─ Testing (Jest, Cypress)
+ └─ Databases (SQL/NoSQL — basic understanding)
 ```
 
-### Путь бэкенд-разработчика
+### Backend Developer Path
 
 ```
-Язык: Node.js / Python / Java / Go
+Language: Node.js / Python / Java / Go
  │
-Фреймворк: Express / Django / Spring / Gin
+Framework: Express / Django / Spring / Gin
  │
-Базы данных: PostgreSQL, MongoDB, Redis
+Databases: PostgreSQL, MongoDB, Redis
  │
-API: REST, GraphQL
+APIs: REST, GraphQL
  │
-DevOps-основы: Docker, CI/CD
+DevOps basics: Docker, CI/CD
 ```
 
-**Совет:** не пытайтесь изучить всё сразу. Сначала — HTML, CSS, JS на хорошем уровне, потом — один фреймворк.
+**Tip:** don't try to learn everything at once. Start with solid HTML, CSS, and JS, then pick one framework.
 
 ---
 
-## 2. HTML: элементы и атрибуты
+## 2. HTML: Elements and Attributes
 
-### Структура HTML-документа
+### HTML Document Structure
 
 ```html
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Мой сайт</title>
+    <title>My Site</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -59,155 +59,155 @@ DevOps-основы: Docker, CI/CD
 </html>
 ```
 
-### Семантические теги HTML5
+### HTML5 Semantic Tags
 
-Семантика — использование тегов по их смыслу, а не только для оформления.
+Semantics means using tags according to their meaning, not just for styling.
 
-| Тег | Назначение |
-|-----|-----------|
-| `<header>` | Шапка страницы или раздела |
-| `<nav>` | Навигационные ссылки |
-| `<main>` | Основное содержимое страницы (один на страницу) |
-| `<section>` | Тематически связанный блок контента |
-| `<article>` | Самодостаточный контент (статья, пост) |
-| `<aside>` | Боковая панель, дополнительный контент |
-| `<footer>` | Подвал страницы или раздела |
-| `<figure>` / `<figcaption>` | Изображение с подписью |
+| Tag | Purpose |
+|-----|---------|
+| `<header>` | Page or section header |
+| `<nav>` | Navigation links |
+| `<main>` | Main content of the page (one per page) |
+| `<section>` | Thematically related block of content |
+| `<article>` | Self-contained content (article, post) |
+| `<aside>` | Sidebar, supplementary content |
+| `<footer>` | Page or section footer |
+| `<figure>` / `<figcaption>` | Image with a caption |
 
-**Зачем семантика?**
-- Улучшает **SEO** (поисковые роботы понимают структуру)
-- Улучшает **доступность** (скринридеры для людей с нарушениями зрения)
-- Улучшает **читаемость** кода
+**Why use semantics?**
+- Improves **SEO** (search engines understand the structure)
+- Improves **accessibility** (screen readers for visually impaired users)
+- Improves code **readability**
 
-### Атрибуты
+### Attributes
 
 ```html
-<!-- Глобальные атрибуты — применимы к любому тегу -->
+<!-- Global attributes — applicable to any tag -->
 <div id="hero" class="banner dark" data-theme="night">...</div>
 
-<!-- Атрибуты доступности (ARIA) -->
-<button aria-label="Закрыть меню" aria-expanded="false">✕</button>
-<img src="cat.jpg" alt="Рыжий кот на подоконнике" />
+<!-- Accessibility attributes (ARIA) -->
+<button aria-label="Close menu" aria-expanded="false">✕</button>
+<img src="cat.jpg" alt="An orange cat on a windowsill" />
 
-<!-- Атрибут lang — язык контента -->
+<!-- lang attribute — language of the content -->
 <p lang="en">Hello, world!</p>
 ```
 
-| Атрибут | Описание |
-|---------|----------|
-| `id` | Уникальный идентификатор элемента |
-| `class` | Один или несколько CSS-классов |
-| `data-*` | Пользовательские данные для JS |
-| `alt` | Текстовое описание изображения (обязателен) |
-| `aria-label` | Доступное имя для скринридеров |
-| `aria-hidden` | Скрывает элемент от вспомогательных технологий |
-| `tabindex` | Порядок фокусировки клавишей Tab |
+| Attribute | Description |
+|-----------|-------------|
+| `id` | Unique identifier of the element |
+| `class` | One or more CSS classes |
+| `data-*` | Custom data for JavaScript |
+| `alt` | Text description of an image (required) |
+| `aria-label` | Accessible name for screen readers |
+| `aria-hidden` | Hides the element from assistive technologies |
+| `tabindex` | Tab-key focus order |
 
 ---
 
-## 3. HTML-формы и элементы ввода
+## 3. HTML Forms and Inputs
 
-### Базовая структура формы
+### Basic Form Structure
 
 ```html
 <form action="/submit" method="POST" novalidate>
   <fieldset>
-    <legend>Контактные данные</legend>
+    <legend>Contact Details</legend>
 
-    <label for="name">Имя</label>
+    <label for="name">Name</label>
     <input type="text" id="name" name="name" required minlength="2" />
 
     <label for="email">Email</label>
     <input type="email" id="email" name="email" required />
 
-    <button type="submit">Отправить</button>
+    <button type="submit">Submit</button>
   </fieldset>
 </form>
 ```
 
-### Типы `<input>`
+### `<input>` Types
 
-| `type` | Описание | HTML |
-|--------|----------|------|
-| `text` | Однострочный текст | `<input type="text">` |
-| `email` | Email с валидацией формата | `<input type="email">` |
-| `password` | Скрытый ввод | `<input type="password">` |
-| `number` | Число с кнопками ± | `<input type="number" min="0" max="100">` |
-| `range` | Ползунок | `<input type="range">` |
-| `checkbox` | Флажок | `<input type="checkbox">` |
-| `radio` | Переключатель (один из группы) | `<input type="radio" name="gender">` |
-| `date` | Выбор даты | `<input type="date">` |
-| `file` | Загрузка файла | `<input type="file" accept=".pdf">` |
-| `hidden` | Скрытое поле | `<input type="hidden" value="42">` |
-| `submit` | Кнопка отправки | `<input type="submit">` |
+| `type` | Description | HTML |
+|--------|-------------|------|
+| `text` | Single-line text | `<input type="text">` |
+| `email` | Email with format validation | `<input type="email">` |
+| `password` | Hidden input | `<input type="password">` |
+| `number` | Number with ± buttons | `<input type="number" min="0" max="100">` |
+| `range` | Slider | `<input type="range">` |
+| `checkbox` | Checkbox | `<input type="checkbox">` |
+| `radio` | Radio button (one of a group) | `<input type="radio" name="gender">` |
+| `date` | Date picker | `<input type="date">` |
+| `file` | File upload | `<input type="file" accept=".pdf">` |
+| `hidden` | Hidden field | `<input type="hidden" value="42">` |
+| `submit` | Submit button | `<input type="submit">` |
 
-### Другие элементы форм
+### Other Form Elements
 
 ```html
-<!-- Выпадающий список -->
+<!-- Dropdown list -->
 <select name="city" id="city">
-  <option value="">— Выберите город —</option>
-  <option value="msk">Москва</option>
-  <option value="spb">Санкт-Петербург</option>
+  <option value="">— Select a city —</option>
+  <option value="nyc">New York</option>
+  <option value="la">Los Angeles</option>
 </select>
 
-<!-- Многострочный текст -->
-<textarea name="message" rows="5" cols="40" placeholder="Ваше сообщение..."></textarea>
+<!-- Multi-line text -->
+<textarea name="message" rows="5" cols="40" placeholder="Your message..."></textarea>
 ```
 
-### Встроенная валидация HTML5
+### HTML5 Built-in Validation
 
 ```html
-<input type="email" required />           <!-- поле обязательно -->
+<input type="email" required />                   <!-- field is required -->
 <input type="text" minlength="3" maxlength="50" />
 <input type="number" min="1" max="10" step="1" />
-<input type="text" pattern="[A-Za-z]{3,}" title="Только буквы, минимум 3" />
+<input type="text" pattern="[A-Za-z]{3,}" title="Letters only, at least 3" />
 ```
 
 ---
 
-## 4. Введение в CSS
+## 4. Introduction to CSS
 
-### Способы подключения CSS
+### Ways to Add CSS
 
 ```html
-<!-- 1. Внешний файл (рекомендуется) -->
+<!-- 1. External file (recommended) -->
 <link rel="stylesheet" href="styles.css" />
 
-<!-- 2. Встроенный блок <style> -->
+<!-- 2. Embedded <style> block -->
 <style>
   body { font-family: sans-serif; }
 </style>
 
-<!-- 3. Инлайн-стили (только для исключений) -->
-<p style="color: red; font-weight: bold;">Важно!</p>
+<!-- 3. Inline styles (exceptions only) -->
+<p style="color: red; font-weight: bold;">Important!</p>
 ```
 
-### Каскад и специфичность
+### Cascade and Specificity
 
-Когда несколько правил применяются к одному элементу, побеждает то, у которого **выше специфичность**.
+When multiple rules apply to the same element, the one with the **higher specificity** wins.
 
-| Селектор | Специфичность (условные единицы) |
-|----------|----------------------------------|
+| Selector | Specificity (units) |
+|----------|---------------------|
 | `*` | 0 |
-| `p`, `div` (тег) | 1 |
+| `p`, `div` (tag) | 1 |
 | `.class`, `[attr]` | 10 |
 | `#id` | 100 |
-| `style=""` (инлайн) | 1000 |
-| `!important` | Перекрывает всё (использовать редко) |
+| `style=""` (inline) | 1000 |
+| `!important` | Overrides everything (use sparingly) |
 
 ```css
-/* специфичность 1 */
+/* specificity 1 */
 p { color: black; }
 
-/* специфичность 10 — побеждает */
+/* specificity 10 — wins */
 .highlight { color: yellow; }
 
-/* специфичность 110 — побеждает оба */
+/* specificity 110 — wins both */
 #hero .highlight { color: red; }
 ```
 
-### Блочная модель (Box Model)
+### Box Model
 
 ```
 ┌───────────────────────────────┐
@@ -226,19 +226,19 @@ p { color: black; }
 
 ```css
 .box {
-  width: 300px;        /* ширина контента */
-  padding: 16px;       /* внутренний отступ */
+  width: 300px;           /* content width */
+  padding: 16px;          /* inner spacing */
   border: 2px solid #333;
-  margin: 24px auto;   /* внешний отступ; auto — центрирование */
-  box-sizing: border-box; /* width включает padding и border */
+  margin: 24px auto;      /* outer spacing; auto = center horizontally */
+  box-sizing: border-box; /* width includes padding and border */
 }
 ```
 
 ---
 
-## 5. HTML5/CSS3: современные возможности
+## 5. HTML5 / CSS3 Modern Features
 
-### CSS-переменные (Custom Properties)
+### CSS Custom Properties (Variables)
 
 ```css
 :root {
@@ -257,44 +257,44 @@ p { color: black; }
 
 ### Flexbox
 
-Одномерная система расположения элементов (строка или столбец).
+A one-dimensional layout system (row or column).
 
 ```css
 .container {
   display: flex;
   flex-direction: row;       /* row | column | row-reverse | column-reverse */
-  justify-content: center;   /* выравнивание по главной оси */
-  align-items: center;       /* выравнивание по поперечной оси */
+  justify-content: center;   /* alignment along the main axis */
+  align-items: center;       /* alignment along the cross axis */
   gap: 16px;
-  flex-wrap: wrap;           /* перенос на новую строку */
+  flex-wrap: wrap;           /* wrap onto the next line */
 }
 
 .item {
-  flex: 1;           /* занять равную долю свободного пространства */
+  flex: 1;           /* take an equal share of available space */
 }
 ```
 
 ### CSS Grid
 
-Двумерная система расположения (строки и столбцы).
+A two-dimensional layout system (rows and columns).
 
 ```css
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);   /* 3 равные колонки */
+  grid-template-columns: repeat(3, 1fr);   /* 3 equal columns */
   grid-template-rows: auto;
   gap: 24px;
 }
 
 .wide {
-  grid-column: 1 / -1;   /* занять всю строку */
+  grid-column: 1 / -1;   /* span the full row */
 }
 ```
 
-### Переходы и анимации
+### Transitions and Animations
 
 ```css
-/* Переход при смене состояния */
+/* Transition on state change */
 .button {
   background: #5c6bc0;
   transition: background 0.3s ease, transform 0.2s;
@@ -305,7 +305,7 @@ p { color: black; }
   transform: scale(1.05);
 }
 
-/* Анимация */
+/* Keyframe animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -316,23 +316,23 @@ p { color: black; }
 }
 ```
 
-### Медиазапросы и адаптивный дизайн
+### Media Queries and Responsive Design
 
 ```css
-/* Мобильный подход: сначала стили для узких экранов */
+/* Mobile-first: styles for narrow screens first */
 .layout {
   display: grid;
-  grid-template-columns: 1fr;   /* одна колонка на мобильном */
+  grid-template-columns: 1fr;   /* single column on mobile */
 }
 
-/* Расширение для широких экранов */
+/* Expand for wider screens */
 @media (min-width: 820px) {
   .layout {
-    grid-template-columns: 1fr 2fr;  /* боковое меню + контент */
+    grid-template-columns: 1fr 2fr;  /* sidebar + content */
   }
 }
 
-/* Доступность: уважаем настройку «уменьшить движение» */
+/* Accessibility: respect the "reduce motion" preference */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -343,19 +343,19 @@ p { color: black; }
 
 ---
 
-## Шпаргалка: наиболее часто используемые CSS-свойства
+## Cheat Sheet: Most Commonly Used CSS Properties
 
-| Свойство | Что делает |
-|----------|-----------|
+| Property | What it does |
+|----------|-------------|
 | `display` | `block`, `inline`, `flex`, `grid`, `none` |
 | `position` | `static`, `relative`, `absolute`, `fixed`, `sticky` |
-| `color` / `background` | Цвет текста / фона |
-| `font-size`, `font-weight` | Размер и жирность шрифта |
-| `margin` / `padding` | Внешний / внутренний отступ |
-| `border` | Граница: `width style color` |
-| `width` / `height` | Размеры (px, %, rem, vw, vh) |
-| `max-width` | Максимальная ширина (полезно для контейнеров) |
+| `color` / `background` | Text / background color |
+| `font-size`, `font-weight` | Font size and weight |
+| `margin` / `padding` | Outer / inner spacing |
+| `border` | Border: `width style color` |
+| `width` / `height` | Dimensions (px, %, rem, vw, vh) |
+| `max-width` | Maximum width (useful for containers) |
 | `overflow` | `hidden`, `auto`, `scroll` |
-| `z-index` | Порядок наложения слоёв |
-| `cursor` | Вид курсора (`pointer`, `default`, `not-allowed`) |
-| `opacity` | Прозрачность (0 — невидим, 1 — непрозрачен) |
+| `z-index` | Stacking order of layers |
+| `cursor` | Cursor style (`pointer`, `default`, `not-allowed`) |
+| `opacity` | Transparency (0 = invisible, 1 = fully opaque) |
