@@ -1,0 +1,306 @@
+:host {
+  display: block;
+}
+
+.detail-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px 28px 60px;
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  color: #a29bfe;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.back-link:hover {
+  background: rgba(162, 155, 254, 0.08);
+  color: #c4bfff;
+}
+
+/* Loading */
+.loading-state {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(162, 155, 254, 0.15);
+  border-top-color: #a29bfe;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  color: #6b6b80;
+  font-size: 0.9rem;
+}
+
+/* Error */
+.error-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: #ff6b81;
+  font-size: 0.95rem;
+}
+
+/* Hero section */
+.hero {
+  display: flex;
+  gap: 36px;
+  margin-bottom: 36px;
+  align-items: flex-start;
+}
+
+.hero-poster {
+  width: 240px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5),
+  0 0 0 1px rgba(162, 155, 254, 0.08);
+}
+
+.hero-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.anime-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.anime-title-jp {
+  color: #6b6b80;
+  font-style: italic;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+/* Stats */
+.stats-row {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stat-value.score {
+  color: #ffeaa7;
+}
+
+.stat-value.episodes {
+  color: #dd0031;
+}
+
+.stat-value.year {
+  color: #00cec9;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: #6b6b80;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-block;
+  padding: 5px 16px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  background: rgba(0, 206, 201, 0.1);
+  color: #00cec9;
+  border: 1px solid rgba(0, 206, 201, 0.15);
+}
+
+/* Genres */
+.genre-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.genre-pill {
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: rgba(221, 0, 49, 0.08);
+  color: #ff6b81;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(221, 0, 49, 0.15);
+  transition: all 0.2s ease;
+}
+
+.genre-pill:hover {
+  background: rgba(221, 0, 49, 0.15);
+}
+
+/* Studio */
+.studio-info {
+  font-size: 0.88rem;
+  color: #6b6b80;
+}
+
+.studio-name {
+  color: #e8e8f0;
+  font-weight: 600;
+}
+
+/* Synopsis */
+.synopsis-section {
+  background: #14141e;
+  border: 1px solid rgba(162, 155, 254, 0.08);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 36px;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.section-title.purple {
+  color: #a29bfe;
+}
+
+.section-title.white {
+  color: #e8e8f0;
+}
+
+.synopsis-text {
+  color: #b0b0c0;
+  line-height: 1.8;
+  font-size: 0.93rem;
+}
+
+/* Characters */
+.characters-section {
+  margin-bottom: 40px;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 20px;
+}
+
+.character-card {
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.character-card:hover {
+  transform: translateY(-4px);
+}
+
+.character-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  margin: 0 auto 10px;
+  transition: border-color 0.2s ease;
+}
+
+.character-img.main-role {
+  border-color: #dd0031;
+  box-shadow: 0 0 20px rgba(221, 0, 49, 0.2);
+}
+
+.character-img.supporting-role {
+  border-color: rgba(162, 155, 254, 0.2);
+}
+
+.character-name {
+  font-size: 0.78rem;
+  color: #c0c0d0;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.character-role {
+  font-size: 0.7rem;
+  color: #6b6b80;
+  margin-top: 3px;
+}
+
+.character-role.main {
+  color: #ff6b81;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-poster {
+    width: 180px;
+  }
+
+  .hero-info {
+    width: 100%;
+  }
+
+  .stats-row {
+    justify-content: center;
+  }
+
+  .genre-list {
+    justify-content: center;
+  }
+
+  .anime-title {
+    font-size: 1.5rem;
+  }
+
+  .detail-container {
+    padding: 20px 16px 40px;
+  }
+}

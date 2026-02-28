@@ -1,0 +1,126 @@
+<div class="detail-container">
+
+  <!-- Back -->
+  <a routerLink="/anime" class="back-link">
+    ← Back to list
+  </a>
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p class="loading-text">Loading details...</p>
+    </div>
+  }
+
+  <!-- Error -->
+  @if (error && !loading) {
+    <div class="error-state">
+      {{ error }}
+    </div>
+  }
+
+  <!-- Main content -->
+  @if (anime && !loading) {
+
+    <!-- Hero -->
+    <div class="hero">
+
+      <!-- Poster -->
+      <img
+        [src]="anime.images.jpg.large_image_url"
+        [alt]="anime.title"
+        class="hero-poster"
+      />
+
+      <!-- Meta -->
+      <div class="hero-info">
+
+        <h1 class="anime-title">
+          {{ anime.title_english || anime.title }}
+        </h1>
+
+        @if (anime.title_english) {
+          <p class="anime-title-jp">{{ anime.title }}</p>
+        }
+
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value score">
+              {{ anime.score ? anime.score.toFixed(1) : 'N/A' }}
+            </div>
+            <div class="stat-label">Score</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value episodes">
+              {{ anime.episodes ?? '?' }}
+            </div>
+            <div class="stat-label">Episodes</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value year">
+              {{ anime.year ?? 'N/A' }}
+            </div>
+            <div class="stat-label">Year</div>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <span class="status-badge">
+          {{ anime.status }}
+        </span>
+
+        <!-- Genres -->
+        <div class="genre-list">
+          @for (genre of anime.genres; track genre.mal_id) {
+            <span class="genre-pill">{{ genre.name }}</span>
+          }
+        </div>
+
+        <!-- Studio -->
+        @if (anime.studios.length > 0) {
+          <p class="studio-info">
+            Studio: <span class="studio-name">{{ anime.studios[0].name }}</span>
+          </p>
+        }
+
+      </div>
+    </div>
+
+    <!-- Synopsis -->
+    <div class="synopsis-section">
+      <h2 class="section-title purple">Synopsis</h2>
+      <p class="synopsis-text">
+        {{ getSynopsis() }}
+      </p>
+    </div>
+
+    <!-- Characters -->
+    @if (characters.length > 0) {
+      <div class="characters-section">
+        <h2 class="section-title white">Characters</h2>
+        <div class="characters-grid">
+          @for (c of characters; track c.character.mal_id) {
+            <div class="character-card">
+              <img
+                [src]="c.character.images.jpg.image_url"
+                [alt]="c.character.name"
+                class="character-img"
+                [class.main-role]="c.role === 'Main'"
+                [class.supporting-role]="c.role !== 'Main'"
+                loading="lazy"
+              />
+              <div class="character-name">{{ c.character.name }}</div>
+              <div class="character-role" [class.main]="c.role === 'Main'">
+                {{ c.role }}
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+  }
+
+</div>

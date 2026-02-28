@@ -1,0 +1,11 @@
+<nav class="navbar">
+  <a routerLink="/anime" class="navbar-brand">
+    <span class="logo-icon">🎌</span>
+    <span class="accent">Anime Explorer</span>
+  </a>
+  <a routerLink="/anime" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+    Browse
+  </a>
+</nav>
+
+<router-outlet />
