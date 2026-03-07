@@ -1,4 +1,3 @@
-# 9. students/urls.py — создать файл
 from django.urls import path
 from . import views
 

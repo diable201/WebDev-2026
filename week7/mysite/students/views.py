@@ -1,4 +1,3 @@
-# 8. students/views.py — простые views
 from django.http import HttpResponse
 from .models import Student
 
