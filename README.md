@@ -14,6 +14,7 @@ Each week folder contains lecture examples and a laboratory assignment.
 | [Week 5](week5/README.md) | Angular Components | Lab #5 |
 | [Week 6](week6/README.md) | Angular Modules & Router · RESTful APIs · Reactive Programming · Services · Observables | Lab #6 |
 | [Week 7](week7/README.md) | Introduction to Python & Django · Syntax · OOP · Django Project Structure | Lab #7 |
+| [Week 8](week8/README.md) | Django Architecture & API Building · Models · ORM · Migrations · JsonResponse | Lab #8 |
 
 ## Repository Structure
 
@@ -25,5 +26,6 @@ WebDev-2026/
 ├── week4/          # Angular CLI demo app
 ├── week5/          # Angular grade-dashboard app
 ├── week6/          # Angular anime-explorer app (Router, HTTP, RxJS)
-└── week7/          # Django mysite project (Python, OOP, Django intro)
+├── week7/          # Django mysite project (Python, OOP, Django intro)
+└── week8/          # Django shop-back API (Models, ORM, JSON responses)
 ```
