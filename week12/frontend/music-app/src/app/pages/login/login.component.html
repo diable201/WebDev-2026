@@ -1,0 +1,17 @@
+<div class="card">
+  <h2>🎵 music-app</h2>
+
+  <input [(ngModel)]="username" placeholder="username" (keyup.enter)="login()" />
+  <input
+    [(ngModel)]="password"
+    type="password"
+    placeholder="password"
+    (keyup.enter)="login()"
+  />
+
+  <button (click)="login()" [disabled]="loading">
+    {{ loading ? 'Logging in…' : 'Log In' }}
+  </button>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>

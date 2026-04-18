@@ -1,0 +1,70 @@
+<!-- Header -->
+<div class="header">
+  <span class="logo">🎵 music-app</span>
+  <button class="btn-logout" (click)="logout()">Logout</button>
+</div>
+
+<div class="main">
+  <!-- Toolbar: search + ordering -->
+  <div class="toolbar">
+    <input
+      class="search-input"
+      [(ngModel)]="search"
+      (ngModelChange)="onSearch()"
+      placeholder="Search albums by title or artist…"
+    />
+    <select class="ordering-select" [(ngModel)]="ordering" (ngModelChange)="onOrderingChange()">
+      <option value="-released">Newest first</option>
+      <option value="released">Oldest first</option>
+      <option value="artist">Artist A → Z</option>
+      <option value="title">Title A → Z</option>
+    </select>
+  </div>
+
+  <!-- Album grid -->
+  <div class="album-grid">
+    <div
+      *ngFor="let album of albums"
+      class="album-card"
+      [class.active]="selectedAlbum?.id === album.id"
+      (click)="selectAlbum(album)"
+    >
+      <div class="album-title">{{ album.title }}</div>
+      <div class="album-artist">{{ album.artist }}</div>
+      <div class="album-meta">
+        {{ album.released }} &nbsp;·&nbsp; {{ album.song_count }} songs
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="total > 0">
+    <button class="btn-page" (click)="prevPage()" [disabled]="!prevUrl">← Prev</button>
+
+    <span class="page-info">
+      Page {{ page }} of {{ totalPages }} &nbsp;·&nbsp; {{ total }} albums
+    </span>
+
+    <button class="btn-page" (click)="nextPage()" [disabled]="!nextUrl">Next →</button>
+  </div>
+
+  <!-- Songs panel -->
+  <div class="songs-panel" *ngIf="selectedAlbum">
+    <div class="songs-heading">
+      {{ selectedAlbum.title }}
+      &nbsp;—&nbsp;
+      {{ selectedAlbum.artist }}
+      &nbsp;({{ selectedAlbum.released }})
+    </div>
+
+    <p class="empty-msg" *ngIf="loadingSongs">Loading songs…</p>
+
+    <div *ngFor="let song of songs" class="song-row">
+      <span class="track-num">{{ song.track }}</span>
+      <span class="song-title">{{ song.title }}</span>
+      <span class="song-dur">{{ formatDuration(song.duration) }}</span>
+    </div>
+
+    <p class="empty-msg" *ngIf="!loadingSongs && songs.length === 0">No songs found.</p>
+  </div>
+</div>
